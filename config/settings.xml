@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <fromMail>nurielme@gmail.com</fromMail>
+    <toMail>nurielme@gmail.com</toMail>
+    <fromName>NilooSoft</fromName>
+    <nsoftSiteId>C0641B81-A129-4F50-852B-2909FB69053B</nsoftSiteId>
+    <nsoftApplicationId>C0641B81-A129-4F50-852B-2909FB69053B</nsoftApplicationId>
+    <categorySupplierId>28417d81-af09-4e84-9986-53e957a11bf2</categorySupplierId>
+    <nlsCardsWsdlUrl>https://huntercards.hunterhrms.com/HunterCards.svc?wsdl</nlsCardsWsdlUrl>
+    <nlsSecurityWsdlUrl>https://hunterdirectory.hunterhrms.com/SecurityService.svc?wsdl</nlsSecurityWsdlUrl>
+    <nlsDirectoryWsdlUrl>https://hunterdirectory.hunterhrms.com/DirectoryManagementService.svc?wsdl</nlsDirectoryWsdlUrl>
+    <nlsSecurityDomain>ikea-hr</nlsSecurityDomain>
+    <nlsSecurityUsername>Campaign</nlsSecurityUsername>
+    <nlsSecurityPassword>pass2019</nlsSecurityPassword>
+    <searchServiceWsdlUrl>https://huntercards.hunterhrms.com/HunterCards.svc?wsdl</searchServiceWsdlUrl>
+    <languageCode>1033</languageCode>
+    <categoryIDs/>
+    <trace>1</trace>
+    <exceptions>1</exceptions>
+    <cacheWsdl>3</cacheWsdl>
+    <siteAddress>https://ikea.co.il/</siteAddress>
+</root>

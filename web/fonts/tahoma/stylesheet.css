@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 20, 2017, 1:30:29 AM
+    Author     : nurielmeni
+*/
+
+@font-face {font-family: "Tahoma-Ikea";
+  src: url("tahoma.eot"); /* IE9*/
+  src: url("tahoma.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("tahoma.woff2") format("woff2"), /* chrome、firefox */
+  url("tahoma.woff") format("woff"), /* chrome、firefox */
+  url("tahoma.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("tahoma.svg#Tahoma") format("svg"); /* iOS 4.1- */
+}

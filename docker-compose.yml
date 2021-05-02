@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+    environment:
+      MYSQL_DATABASE: 'db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'root'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'root'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - ikeacampaign-data:/var/lib/mysql
+  php:
+    image: yiisoftware/yii2-php:7.1-apache
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    depends_on:
+      - db
+    environment:
+      - PHP_ENABLE_XDEBUG=1
+    ports:
+      - '8000:80'
+      - '9005:9005'
+volumes:
+  ikeacampaign-data:

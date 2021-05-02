@@ -1,0 +1,106 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 27, 2019, 11:53:07 PM
+    Author     : Nurielmeni
+*/
+
+.dir-ltr {
+    direction: ltr;
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex.flex-r {
+    flex-direction: row;
+}
+
+.flex.flex-rr {
+    flex-direction: row-reverse;
+}
+
+.flex.flex-c {
+    flex-direction: column;
+}
+
+.flex.flex-cr {
+    flex-direction: column-reverse;
+}
+
+.flex.flex-ww {
+    flex-wrap: wrap;
+}
+
+.flex.flex-wn {
+    flex-wrap: nowrap;
+}
+
+.flex.flex-wr {
+    flex-wrap: wrap-reverse;
+}
+
+.flex.center {
+    justify-content: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.start {
+    justify-content: flex-start;
+}
+
+.flex.space-around {
+    justify-content: space-around;
+}
+
+.flex.middle {
+    vertical-align: middle;
+}
+
+.flex.top {
+    vertical-align: top;
+}
+
+.flex.bottom {
+    vertical-align: bottom;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+w-100 {
+    width: 100%;
+}
+
+vw-100 {
+    width: 100vw;
+}
+
+button.btn-clear {
+    background: none; 
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
