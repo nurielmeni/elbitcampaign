@@ -26,5 +26,15 @@ services:
     ports:
       - '8000:80'
       - '9005:9005'
+  pma:
+    image: phpmyadmin
+    depends_on: 
+      - db
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8001:80
+
 volumes:
   ikeacampaign-data:
