@@ -17,10 +17,10 @@ class Search extends Model {
 
     const LANG_HEB = '1037';
     const LANG_ENG = '1033';
-    const SELL_STATUS = 3;
     
     private $niloos;
     private $supplierId;
+    private $sellStatus;
     
     public function __construct($supplierId = null) {
         parent::__construct();
@@ -31,6 +31,9 @@ class Search extends Model {
 
         $this->niloos = new Niloos();
         $this->supplierId = $supplierId;
+        $sellStatus = key_exists('sellStatus', Yii::$app->params) 
+            ? Yii::$app->params['sellStatus']
+            : null;
     }
     
     public function suppliersGetByFilter2() {
@@ -84,11 +87,15 @@ class Search extends Model {
                     'Direction' => 'Ascending',
                 ],
             ],
-            'WhereFilters' => [
-                
-                    $this->addWhereFilter('AND', 'SellsStatus', 'Exact', self::SELL_STATUS),
-            ],
         ];
+
+        if ($this->sellStatus) {
+            $filter['WhereFilters'] = [
+                $this->addWhereFilter('AND', 'SellsStatus', 'Exact', $this->sellStatus),
+            ];
+        }
+         
+
 
         return $this->niloos->suppliersGetByFilter2($filter);
     }
@@ -207,13 +214,13 @@ class Search extends Model {
         return $this->niloos->jobsGetByFilter($filter, $cacheKey);
     }
     
-    public function jobs() {
+    public function jobs($full = false) {
         $filter = [
             'transactionCode' => Helper::newGuid(),
             'LanguageId' => self::LANG_HEB,
             'jobFilter' => [
                 'FromView' => 'Jobs',
-                'NumberOfRows' => 10000,
+                'NumberOfRows' => key_exists('maxNumberOfJobs', Yii::$app->params) ? Yii::$app->params['maxNumberOfJobs'] : 1000,
                 'OffsetIndex' => 0,
                 'SelectFilterFields' => [
                     'JobFilterFields' => [
@@ -229,7 +236,7 @@ class Search extends Model {
 //                        'OpenPositions', 
 //                        'Rank', 
                         'RegionValue', 
-//                        'Requiremets', 
+                        'Requiremets', 
 //                        'Skills', 
 //                        'YearsOfExperience',
 //                        'EmployerName',
@@ -258,11 +265,28 @@ class Search extends Model {
                 ],
             ]
         ];
-//                        print '<pre style="direction:ltr;"><code>';
-//                        print_r($filter);
-//                        print '</code></pre>';
+                    //    print '<pre style="direction:ltr;"><code>';
+                    //    print_r($filter);
+                    //    print '</code></pre>';
         $cacheKey = $this->supplierId;
-        return $this->niloos->jobsGetByFilter($filter, $cacheKey);
-    }
+        $jobs = $this->niloos->jobsGetByFilter($filter, $cacheKey);
+        $cities = $this->niloos->getListByName('Cities');
+        
+        if  ($full && is_array($jobs)) {
+            foreach($jobs as &$job) {
+                key_exists('JobId', $job)
+                    ? $job['JobDetails'] = $this->niloos->jobGetConsideringIsDiscreetFiled($job['JobId'])               
+                    : $job['JobDetails'] = [];  
 
+                if(property_exists($job['JobDetails'], 'ExtendedProperties')) {
+                    $exProps = is_array($job['JobDetails']->ExtendedProperties) 
+                        ? $job['JobDetails']['ExtendedProperties']
+                        : [$job['JobDetails']->ExtendedProperties];
+                    $cityId = Helper::getExtendedProperty($exProps, 'Cities');
+                    $job['CityName'] = key_exists($cityId, $cities) ? $cities[$cityId] : '';
+                }
+            }
+        }
+        return $jobs;
+    }
 }

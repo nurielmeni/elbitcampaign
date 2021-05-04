@@ -31,18 +31,20 @@ class Niloos
     private $languageCode = '1033';
     private $client;
     private $auth;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->cache = \Yii::$app->cache;
-        
+
         // Flush cache
         if (array_key_exists('flushCache', \Yii::$app->params) && \Yii::$app->params['flushCache']) $this->cache->flush();
-            
+
         $this->loadSettings();
         $this->authenticate();
     }
-    
-    private function loadSettings() {
+
+    private function loadSettings()
+    {
         // custom initialization code goes here
         $url = Url::to($this->settingsFile);
         if (file_exists($url)) {
@@ -56,8 +58,9 @@ class Niloos
             \Yii::error('Settings file not exist console command', 'Niloos Get Service');
         }
     }
-    
-    private function setProperties() {
+
+    private function setProperties()
+    {
         $settingsArr = Helper::xml2array($this->settings);
         $this->nlsSecurityWsdlUrl = $settingsArr['nlsSecurityWsdlUrl'];
         $this->nlsCardsWsdlUrl = $settingsArr['nlsCardsWsdlUrl'];
@@ -69,8 +72,9 @@ class Niloos
         $this->password = $settingsArr['nlsSecurityPassword'];
         $this->languageCode = $settingsArr['languageCode'];
     }
-    
-    private function setClient($service) {
+
+    private function setClient($service)
+    {
         switch ($service) {
             case 'security':
                 /** Define SOAP headers for token authentication **/
@@ -107,7 +111,7 @@ class Niloos
                 return null;
                 break;
         }
-        
+
         $this->client = new NlsSoapClient($url, array(
             'trace' => 1,
             'exceptions' => 1,
@@ -118,13 +122,13 @@ class Niloos
 
         $this->client->__setSoapHeaders($soap_headers);
     }
-    
+
     /**
      * Authenticate the user against the service and gets an Auth object
      * @return auth object with user data and expiration time
      * @throws \app\modules\niloos\models\Exception
      */
-    private function authenticate() 
+    private function authenticate()
     {
         $transactionCode = Helper::newGuid();
         try {
@@ -134,7 +138,7 @@ class Niloos
             $param[] = new SoapVar($this->siteId, XSD_STRING, null, null, 'applicationSecret', null);
             $options = new SoapVar($param, SOAP_ENC_OBJECT, null, null);
 
-            $this->auth = \Yii::$app->cache->getOrSet('consoleAuth', function () use ($options){
+            $this->auth = \Yii::$app->cache->getOrSet('consoleAuth', function () use ($options) {
                 $this->setClient('security');
                 return $this->client->__soapCall("Authenticate2", array($options));
             }, 60 * 60 * 24);
@@ -144,29 +148,30 @@ class Niloos
         }
         //echo '[' . date("Y-m-d H:i:s") . '] UserNameToken: ' . $this->auth->UsernameToken . "\n";
     }
-    
-    public function testService() {
+
+    public function testService()
+    {
         $return = false;
         $this->setClient('cards');
         $res = $this->client->isServiceReachable();
         $return = $res->isServiceReachableResult;
-        
+
         $this->setClient('directory');
         $res = $this->client->isServiceReachable();
         return $return && $res->isServiceReachableResult;
     }
-    
+
     /**
      * @return categories array
      */
     public function categories($parentId = null)
     {
         $languageCode = $this->languageCode;
-        
-        $res = \Yii::$app->cache->getOrSet('categories', function () use ($parentId, $languageCode){
+
+        $res = \Yii::$app->cache->getOrSet('categories', function () use ($parentId, $languageCode) {
             $this->setClient('directory');
             $list = [];
-            
+
             try {
                 $params = [
                     'transactionCode' => Helper::newGuid(),
@@ -174,10 +179,10 @@ class Niloos
                     'languageId' => $languageCode,
                     'listName' => $parentId === null ? 'ProfessionalCategories' : 'ProfessionalFields',
                 ];
-                
+
                 $res = $this->client->GetListItems($params)->GetListItemsResult;
 
-                if (!property_exists($res, 'ListItemInfo')) 
+                if (!property_exists($res, 'ListItemInfo'))
                     return $list;
 
                 $res = $res->ListItemInfo;
@@ -190,22 +195,65 @@ class Niloos
                 }
 
                 return $list;
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 var_dump($ex);
                 echo 'Request ' . $this->client->__getLastRequest();
                 echo 'Response ' . $this->client->__getLastResponse();
                 die;
             }
         }, 60 * 20);
-        
+
         return $res;
     }
 
-    public function suppliersGetByFilter2($filter) {
+    /**
+     * @return List By Name array
+     */
+    public function getListByName($name)
+    {
+        $languageCode = $this->languageCode;
+
+        $res = \Yii::$app->cache->getOrSet('categories', function () use ($name, $languageCode) {
+            $this->setClient('directory');
+            $list = [];
+
+            try {
+                $params = [
+                    'transactionCode' => Helper::newGuid(),
+                    'parentItemId' => null,
+                    'languageId' => $languageCode,
+                    'listName' => $name,
+                ];
+
+                $res = $this->client->GetListItems($params)->GetListItemsResult;
+
+                if (!property_exists($res, 'ListItemInfo'))
+                    return $list;
+
+                $res = $res->ListItemInfo;
+
+                foreach ($res as $item) {
+                    $list[$item->ListItemId] = $item->ValueTranslated;
+                }
+
+                return $list;
+            } catch (\Exception $ex) {
+                var_dump($ex);
+                echo 'Request ' . $this->client->__getLastRequest();
+                echo 'Response ' . $this->client->__getLastResponse();
+                die;
+            }
+        }, 60 * 30);
+
+        return $res;
+    }
+
+    public function suppliersGetByFilter2($filter)
+    {
         $this->setClient('cards');
         $languageCode = $this->languageCode;
 
-        $res = \Yii::$app->cache->getOrSet('suppliersGetByFilter2', function () use ($languageCode, $filter){
+        $res = \Yii::$app->cache->getOrSet('suppliersGetByFilter2', function () use ($languageCode, $filter) {
             $this->setClient('cards');
 
             $params = [
@@ -214,33 +262,34 @@ class Niloos
                 'transactionCode' => Helper::newGuid(),
             ];
 
-            try{
+            try {
                 $response = $this->client->SuppliersGetByFilter2($params);
                 $xmlRes = $response->SuppliersGetByFilter2Result->any;
                 $xmlRes = substr($xmlRes, strpos($xmlRes, '<diffgr:'));
                 $xmlObj = simplexml_load_string($xmlRes);
                 $json = json_encode($xmlObj);
-                
+
                 // If the Cards do not returned by the function
                 if (!preg_match('/DocumentElement.*Cards/', $json)) {
                     return [];
                 }
                 $resarray = json_decode($json, TRUE);
-                                
+
                 return $resarray['DocumentElement']['Cards'];
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 var_dump($ex);
                 echo 'Request ' . $this->client->__getLastRequest();
                 echo 'Response ' . $this->client->__getLastResponse();
                 die;
             }
         }, 60 * 10);
-        
+
         return $res;
     }
-    
-    public function jobGetConsideringIsDiscreetFiled($jobId) {
-        $res = \Yii::$app->cache->getOrSet('jobGetConsideringIsDiscreetFiled' . $jobId, function () use ($jobId){
+
+    public function jobGetConsideringIsDiscreetFiled($jobId)
+    {
+        $res = \Yii::$app->cache->getOrSet('jobGetCDF' . $jobId, function () use ($jobId) {
             $this->setClient('cards');
 
             $params = [
@@ -248,25 +297,50 @@ class Niloos
                 'transactionCode' => Helper::newGuid(),
             ];
 
-            try{
+            try {
                 $response = $this->client->JobGetConsideringIsDiscreetFiled($params);
                 return $response->JobGetConsideringIsDiscreetFiledResult;
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 var_dump($ex);
                 echo 'Request ' . $this->client->__getLastRequest();
                 echo 'Response ' . $this->client->__getLastResponse();
                 die;
             }
         }, 60 * 10);
-        
+
         return $res;
     }
-    
+
+    public function getJobFields($jobId)
+    {
+        try {
+            $params = array(
+                "JobId" => $jobId,
+                'transactionCode' => Helper::newGuid(),
+            );
+            $this->setClient('cards');
+            $response = $this->client->JobProfessionalFieldsGet($params);
+
+            return $response->JobProfessionalFieldsGetResult;
+        } catch (\Exception $e) {
+            /**
+             * var_dump($ex);
+             * echo "Request " . $this->client->__getLastRequest();
+             * echo "Response " . $this->client->__getLastResponse();
+             * die;
+             **/
+            throw new \Exception('Error: Niloos services are not availiable, try later.');
+        }
+    }
+
     /*
      * @return Jobs by filter
      */
-    public function jobsGetByFilter($filter, $cacheKey = 'niloos_search_result') {
-        return $this->cache->getOrSet($cacheKey, function () use ($filter){
+    public function jobsGetByFilter($filter, $cacheKey = 'niloos_search_result')
+    {
+        return $this->cache->getOrSet(
+            $cacheKey,
+            function () use ($filter) {
                 try {
                     $this->setClient('cards');
                     $jobsXml =  $this->client->JobsGetByFilter($filter);
@@ -276,17 +350,18 @@ class Niloos
                     $jobs = json_decode(json_encode($jobsObj), TRUE);
                     if (key_exists('DocumentElement', $jobs) && key_exists('Jobs', $jobs['DocumentElement'])) {
                         $jobsArray = $jobs['DocumentElement']['Jobs'];
-                        
+
                         // If only one item place it in an array
                         return key_exists('JobId', $jobsArray) ? [$jobsArray] : $jobsArray;
-                    } 
+                    }
                 } catch (\SoapFault $e) {
                     $test = $e;
-                }    
-                
+                }
+
                 // No results or bad result from search
                 return [];
-            }, 60 * 5);
+            },
+            60 * 20
+        );
     }
-    
 }

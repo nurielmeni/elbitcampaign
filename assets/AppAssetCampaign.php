@@ -15,25 +15,23 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAssetCampaign extends AssetBundle
+
+ class AppAssetCampaign extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
         'css/campaign.css',
-        'css/accessability.css',
+        'fonts/font-awesome-4.7.0/css/font-awesome.min.css',
         'css/colors.css',
         'css/flex.css',
-        'js/jbility/css/jbility.css',
-        'fonts/tahoma/stylesheet.css',
+        'css/normalize.css',
+        'css/responsives.css',
     ];
     public $js = [
-        'js/jbility/js/jbility.min.js',
         'js/app.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'airani\bootstrap\BootstrapRtlAsset',
     ];
 }

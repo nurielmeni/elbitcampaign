@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <fromMail>nurielme@gmail.com</fromMail>
+    <fromMail>elbitcareer@hunterhrms.com</fromMail>
     <toMail>nurielme@gmail.com</toMail>
-    <fromName>NilooSoft</fromName>
-    <nsoftSiteId>C0641B81-A129-4F50-852B-2909FB69053B</nsoftSiteId>
-    <nsoftApplicationId>C0641B81-A129-4F50-852B-2909FB69053B</nsoftApplicationId>
-    <categorySupplierId>28417d81-af09-4e84-9986-53e957a11bf2</categorySupplierId>
+    <fromName>Elbit Campaign Site</fromName>
+    <nsoftSiteId>54db0aad-09b9-4954-a9d4-33512df547fb</nsoftSiteId>
+    <nsoftApplicationId>54db0aad-09b9-4954-a9d4-33512df547fb</nsoftApplicationId>
+    <categorySupplierId>e48f8706-d313-4e60-bce4-5fcbb45e3514</categorySupplierId>
     <nlsCardsWsdlUrl>https://huntercards.hunterhrms.com/HunterCards.svc?wsdl</nlsCardsWsdlUrl>
     <nlsSecurityWsdlUrl>https://hunterdirectory.hunterhrms.com/SecurityService.svc?wsdl</nlsSecurityWsdlUrl>
     <nlsDirectoryWsdlUrl>https://hunterdirectory.hunterhrms.com/DirectoryManagementService.svc?wsdl</nlsDirectoryWsdlUrl>
-    <nlsSecurityDomain>ikea-hr</nlsSecurityDomain>
-    <nlsSecurityUsername>Campaign</nlsSecurityUsername>
-    <nlsSecurityPassword>pass2019</nlsSecurityPassword>
+    <nlsSecurityDomain>elbitsys</nlsSecurityDomain>
+    <nlsSecurityUsername>Joomlasite</nlsSecurityUsername>
+    <nlsSecurityPassword>pass2017</nlsSecurityPassword>
     <searchServiceWsdlUrl>https://huntercards.hunterhrms.com/HunterCards.svc?wsdl</searchServiceWsdlUrl>
     <languageCode>1033</languageCode>
     <categoryIDs/>
     <trace>1</trace>
     <exceptions>1</exceptions>
     <cacheWsdl>3</cacheWsdl>
-    <siteAddress>https://ikea.co.il/</siteAddress>
+    <siteAddress>https://elbit.co.il/</siteAddress>
 </root>

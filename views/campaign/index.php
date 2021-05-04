@@ -24,11 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            [
-                'attribute' => 'show_store',
-                'format' => 'html',
-                'value' => function($data) { return $data->show_store === 0 ? '<span class="label label-danger">' . Yii::t('app', 'No') . '</span>' : '<span class="label label-success">' . Yii::t('app', 'Yes') . '</span>'; },
-            ],
+            // [
+            //     'attribute' => 'show_store',
+            //     'format' => 'html',
+            //     'value' => function($data) { return $data->show_store === 0 ? '<span class="label label-danger">' . Yii::t('app', 'No') . '</span>' : '<span class="label label-success">' . Yii::t('app', 'Yes') . '</span>'; },
+            // ],
             [
                 'attribute' => 'name',
                 'format' => 'html',

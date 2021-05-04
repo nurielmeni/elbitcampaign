@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Campaign;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use app\Controllers\ElbitController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 /**
  * CampaignController implements the CRUD actions for Campaign model.
  */
-class CampaignController extends Controller
+class CampaignController extends ElbitController
 {
     /**
      * {@inheritdoc}
@@ -99,6 +99,12 @@ class CampaignController extends Controller
                 $image->saveAs($model->image);
             }
             
+            $image = UploadedFile::getInstance($model, 'mobile_image');
+            if ($image) {
+                $model->mobile_image = 'uploads/images/' . $image->baseName . '.' . $image->extension;
+                $image->saveAs($model->mobile_image);
+            }
+            
             $image = UploadedFile::getInstance($model, 'logo');
             if ($image) {
                 $model->logo = 'uploads/images/' . $image->baseName . '.' . $image->extension;
@@ -121,7 +127,7 @@ class CampaignController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
-     */
+     **/
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -131,6 +137,12 @@ class CampaignController extends Controller
             if ($image) {
                 $model->image = 'uploads/images/' . $image->baseName . '.' . $image->extension;
                 $image->saveAs($model->image);
+            }
+            
+            $image = UploadedFile::getInstance($model, 'mobile_image');
+            if ($image) {
+                $model->mobile_image = 'uploads/images/' . $image->baseName . '.' . $image->extension;
+                $image->saveAs($model->mobile_image);
             }
             
             $image = UploadedFile::getInstance($model, 'logo');

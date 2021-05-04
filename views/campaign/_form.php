@@ -25,12 +25,17 @@ use yii\web\View;
 
     <?= $form->field($model, 'sid')->dropDownList($model->supplierOptions) ?>
 
-    <?= $form->field($model, 'start_date')->widget(DatePicker::class, \Yii::$app->params['datePickerKvOptions']) ?>
-
-    <?= $form->field($model, 'end_date')->widget(DatePicker::class, \Yii::$app->params['datePickerKvOptions']) ?>
+    <div class="row">
+        <div class="col-xs-6">
+            <?= $form->field($model, 'start_date')->widget(DatePicker::class, \Yii::$app->params['datePickerKvOptions']) ?>
+        </div>
+    
+        <div class="col-xs-6">
+            <?= $form->field($model, 'end_date')->widget(DatePicker::class, \Yii::$app->params['datePickerKvOptions']) ?>
+        </div>
+    </div>
 
     <hr>
-    <?= $form->field($model, 'button_color')->widget(\kartik\color\ColorInput::class) ?>
 
     <?= $form->field($model, 'campaign')->widget(\bizley\quill\Quill::className(), [
         'toolbarOptions' => [
@@ -48,32 +53,27 @@ use yii\web\View;
     
     <hr>
     
-    <?= $form->field($model, 'show_store')->widget(SwitchInput::class, [
-        'pluginOptions'=>[
-            'onText'=>Yii::t('app', 'Yes'),
-            'offText'=>Yii::t('app', 'No'),
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'show_cv')->widget(SwitchInput::class, [
-        'pluginOptions'=>[
-            'onText'=>Yii::t('app', 'Yes'),
-            'offText'=>Yii::t('app', 'No'),
-        ]
-    ]); ?>
     
     <hr>
     <?= $form->field($model, 'image')->widget(ImageInputWidget::class, [
             'htmlOptions' => ['style' => 'cursor: pointer;'],
-            'placeHolder' => 'uploads/theme/icons8-picture.svg',
+            'placeHolder' => 'images/image-placeholder.svg',
+        ]);
+    ?>
+
+    <?= $form->field($model, 'mobile_image')->widget(ImageInputWidget::class, [
+            'htmlOptions' => ['style' => 'cursor: pointer;'],
+            'placeHolder' => 'images/image-placeholder.svg',
         ]);
     ?>
 
     <?= $form->field($model, 'logo')->widget(ImageInputWidget::class, [
             'htmlOptions' => ['style' => 'cursor: pointer;'],
-            'placeHolder' => 'uploads/theme/icons8-picture.svg',
+            'placeHolder' => 'images/image-placeholder.svg',
         ]);
     ?>
+
+    <?= $form->field($model, 'youtube_video_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contact')->textInput(['maxlength' => true]) ?>
 

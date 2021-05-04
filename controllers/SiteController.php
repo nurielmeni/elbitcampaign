@@ -4,16 +4,17 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\FbfContactForm;
 use app\models\Campaign;
+use app\models\Search;
 use yii\web\UploadedFile;
+use app\controllers\ElbitController;
 
-class SiteController extends Controller
+class SiteController extends ElbitController
 {
     public $defaultAction = 'contact';
     
@@ -138,10 +139,13 @@ class SiteController extends Controller
             $campaign->hits += 1;
             $campaign->save(false, ['hits']);
         }
+
+        $search = new Search($model->supplierId);
         
         return $this->render('contact', [
             'campaign' => $campaign,
             'model' => $model,
+            'jobs' => $search->jobs(true)
         ]);
     }
     
@@ -156,4 +160,5 @@ class SiteController extends Controller
             'del' => $del,
         ]);
     }
+    
 }

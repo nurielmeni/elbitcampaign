@@ -17,17 +17,27 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Ikea Campaign" />
-    <meta property="og:url" content="http://ikea.co.il" />
-    <meta property="og:image" content="/uploads/theme/logo2x.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="<?= Yii::$app->charset ?>">
 
-    <link rel="icon" type="image/png" href="<?= Url::to('@web/uploads/theme/ikea-logo.png') ?>" />
+    <!-- OPEN GRAPH  -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Elbit" />
+    <meta property="og:description" content="" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:image" content="<?= Url::to('@web/uploads/images/logo-v2.png') ?>" />
+
+    <!-- GOOGLE FONTS HEEBO -->
+	<link href="https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900&display=swap&subset=hebrew" rel="stylesheet">
+
+    <!-- ICON -->
+    <link rel="shortcut icon" href="<?= Url::to('@web/uploads/images/logo.png') ?>">
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800&amp;subset=hebrew" rel="stylesheet">
+    
     <?php $this->head() ?>
 </head>
 <body>
@@ -47,7 +57,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('@web/uploads/theme/ikea-logo.png', ['height' => '100%', 'alt' => 'Ikea logo', 'style' => 'margin-left: 10px;']) . Yii::$app->name,
+        'brandLabel' => Html::img('@web/images/logo.png', ['height' => '100%', 'alt' => 'Elbit logo', 'style' => 'margin-left: 10px;']) . Yii::$app->name,
         'brandOptions' => ['style' => 'display: inline-flex;'],
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -59,6 +69,7 @@ AppAsset::register($this);
         'encodeLabels' => false,
         'items' => [
             ['label' => '<i class="glyphicon glyphicon-home"></i>', 'url' => ['/campaign/index']],
+            ['label' => 'Team', 'url' => ['/team/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'כניסה', 'url' => ['/site/login']]
             ) : (

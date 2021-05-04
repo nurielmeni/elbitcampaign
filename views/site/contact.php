@@ -4,187 +4,105 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\helpers\Url;
-use app\widgets\ikeaSelect\IkeaSelectWidget;
+
+use app\widgets\youtubePlayer\YoutubePlayerWidget;
 
 $this->title = $campaign->name;
 
-// Google tag manager head
-$js = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-59CMPPZ');";
-
-//// Register header and body scripts
-//// To bypass site restriction to save script data
-//$this->registerJs($campaign->tag_header, $this::POS_HEAD);
-//$this->registerJs($campaign->tag_body, $this::POS_BEGIN);
-
-
-$js = "$('button[type=\"submit\"]').on('click', function() {
-    if ($('form#contact-form .has-error').length === 0) {
-    	console.log('tag submit');
-        dataLayer.push({'Category':'Ikea דרושים','Action':'Form Sent','Label':'Success' ,'event':'auto_event'});
-    }
-});";
-$this->registerJs($js, $this::POS_READY);
 ?>
-<?php $this->beginBlock('tag_header'); ?>
-    <?= $campaign->tag_header ?>
-<?php $this->endBlock(); ?>
 
-<style>   
-    .btn.btn-primary {
-        background-color: <?= empty($campaign->button_color) ? '#FFDB00' :  $campaign->button_color ?>;
-    }
-    .campaign-wrap .ikea-image {
-        background: url('<?= Url::to('@web/' . $campaign->image) ?>') no-repeat top center; 
-        background-size: cover;
-        min-height: 30vh;
-    }
-</style>
+<?= YoutubePlayerWidget::widget([
+    'playButtonId' => 'youtube-player-button',
+    'videoId' => $campaign->youtube_video_id
+    ]) ?>
 
-<?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+<div class="header header-v2">
+    <div class="logo-v2">
+        <a href="#"><img src="images/logo-v2.png" alt="Logo"></a>
+    </div>
+</div>
 
-<?= $campaign->tag_body ?>
-
-<div class="reply-wrapper bg-main hv-100 flex flex-c center">
-    <div class="container" style="margin-top: 150px;">
-        <div class="row">
-            <div role="alert" class="alert alert-success ikea-title col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <h3><?= Yii::t('app', 'Thank you for your request! we will contact you soon') ?></h3>
-                <h4><?= Yii::t('app', 'Just before you leave, pick are facebook') ?></h4>
-                <p>
-                    <?= Yii::t('app', 'Redirect to are facebook page') ?>
-                    <?= Html::a(Yii::t('app', 'press here'), Yii::$app->params['faceBook'], ['class' => 'fb-icon']) ?>
-                </p>
-            </div>
-        </div>
-
-        <div class="row actions">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">            
-                <?= Html::a(Yii::t('app', 'More Jobs'), Yii::$app->params['additionalJobs'], ['class' => 'btn btn-default bg-white fg-blue text-bold']) ?>
-                <button class="btn bg-yellow fg-blue text-bold">
-                    <?= Html::a('חזור', Url::to('@web/' . $campaign->id)) ?>
-                </button>
-            </div>
+<div class="banner banner-v2">
+    <img class="banner-desktop" src="<?= $campaign->image ?>" alt="Banner">
+    <img class="banner-mobile" src="<?= $campaign->mobile_image ?>" alt="Banner">
+    <div class="container">
+        <div class="inner-banner">
+            <?= $campaign->campaign ?>
         </div>
     </div>
 </div>
 
-<?php else: ?>
+<div class="video-yotube">
+    <div class="container">
+        <div class="inner-video-yotube">
+            <img src="https://img.youtube.com/vi/<?= $campaign->youtube_video_id ?>/sddefault.jpg" alt="youtube">
+            <a href="#" id='youtube-player-button' class="btn-video"><img src="images/icon-youtube.png" alt="Play"></a>
+        </div>
+    </div>
+</div>
 
-<div id="ikea-wrapper" class="row-fluid h-100 flex flex-r flex-ww space-between">
-    <div class="w-100 visible-xs">
-        <?= Html::img('@web/' . $campaign->logo, ['style' => 'width: 18%; position: absolute; top: 15px;left: 15px;', 'alt' => 'לוגו איקאה', 'class' => 'visible-xs']) ?>
-        <!---- Campaign Image Placeholder ---->
-        <?= Html::img('@web/' . $campaign->image, ['alt' => 'Ikea Campaign Image', 'width' => '100%', 'class' => '']) ?>
-    </div>
-    <div class="ikea-image col-md-8 col-sm-7 col-xs-12 hidden-xs">
-        <!---- Campaign Image Placeholder ---->
-    </div>
-    <div class="ikea-form flex flex-c col-md-4 col-sm-5 col-xs-12">
-        <div class="row-fluid logo text-left bg-main hidden-xs">
-            <div class="col-xs-12">
-            <?= Html::img('@web/' . $campaign->logo, ['width' => '38%', 'alt' => 'לוגו איקאה']) ?>
+<div class="main-content job-page">
+    <div class="container">
+        <div class="box-presonal job-page elbit-form search-page">
+            <form>
+                <table id="job-results">
+                    <?= $this->render('_resultsHeader') ?>
+                    <?php foreach($jobs as $job) : ?>
+                        <?= $this->render('_resultsJob', ['job' => $job]) ?>
+                    <?php endforeach; ?>
+                    <?= $this->render('_activeShow') ?>
+                </table>
+            </form>
+            <div class="step-next pagenavis">
+                <a href="#" class="back-step">הגש/י קורות חיים למאגר הכללי ></a>
+                <a href="#" class="back-step back-stepv2">הגש/י קורות חיים למשרות המסומנות > </a>
             </div>
         </div>
-        
-        <div class="row-fluid bg-blue h-100 fields">
-
-            <div id="campaign" class="col-xs-12">
-                <?= $campaign->campaign ?>
+    </div>
+</div>
+<div class="section-client">
+    <div class="container">
+        <div class="slider-client">
+            <div class="arrows-slider">
+                <span class="btn-arrows next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                <span class="btn-arrows prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
             </div>
-
-            <div class="ikea-form col-xs-12">
-                <?php $form = ActiveForm::begin(['id' => 'contact-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
-
-                    <?= $form->field($model, 'name', ['errorOptions' => ['id' => 'help-name'], 'options' => ['class' => 'form-group']])
-                        ->textInput([
-                            'autofocus' => true, 
-                            'placeholder' => $model->getAttributeLabel('name'), 
-                            'aria-label' => $model->getAttributeLabel('name'),
-                            'aria-describedby' => 'help-name',
-                        ])->label(false) ?>
-
-                    <?= $form->field($model, 'phone', ['errorOptions' => ['id' => 'help-phone'], 'options' => ['class' => 'form-group']])
-                        ->textInput([
-                            'placeholder' => $model->getAttributeLabel('phone'), 
-                            'aria-label' => $model->getAttributeLabel('phone'),
-                            'aria-describedby' => 'help-phone',
-                        ])->label(false) ?>
-
-                    <?= $form->field($model, 'email', ['errorOptions' => ['id' => 'help-email'], 'options' => ['class' => 'form-group']])
-                        ->textInput([
-                            'placeholder' => $model->getAttributeLabel('email'), 
-                            'aria-label' => $model->getAttributeLabel('email'),
-                            'aria-describedby' => 'help-email',
-                        ])->label(false) ?>
-                
-                    <?php if ($campaign->show_store) : ?>
-                    <?= IkeaSelectWidget::widget([
-                            'model' => $model,
-                            'attribute' => 'store',
-                            'prompt' => $model->getAttributeLabel('jobTitle'), 
-                            'items' => $model->stores,
-                            'inputOptions' => [
-                                'class' => 'form-control selectpicker',
-                                'aria-label' => $model->getAttributeLabel('jobTitle'),
-                                'aria-describedby' => 'help-jobTitle',
-                            ],
-                        ]) ?>
-                    <?php endif; ?>
-                
-                    <?= IkeaSelectWidget::widget([
-                            'model' => $model,
-                            'attribute' => 'jobTitle',
-                            'prompt' => $model->getAttributeLabel('jobTitle'), 
-                            'items' => $model->jobs,
-                            'inputOptions' => [
-                                'class' => 'form-control selectpicker',
-                                'aria-label' => $model->getAttributeLabel('jobTitle'),
-                                'aria-describedby' => 'help-jobTitle',
-                            ],
-                        ]) ?>
-
-                    <?php if ($campaign->show_cv === 1) : ?>
-                        <?= $form->field($model, 'cvfile', ['errorOptions' => ['id' => 'help-cvfile'], 'options' => ['class' => 'form-group']])
-                            ->fileInput([
-                                'class' => 'sr-only',
-                                'aria-label' => $model->getAttributeLabel('cvfile'),
-                                'aria-describedby' => 'help-cvfile',
-                                'accept' => '.pdf,.rtf,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                            ])->label('<i class="glyphicon glyphicon-paperclip" style="margin-left: 10px;"></i>'  . $model->getAttributeLabel('cvfile')) ?>
-                    <?php endif; ?>
-                    <p class="text-small agreement">
-                        <small>
-                            <?= $this->render('userAgreament') ?>
-                        </small>
-                    </p>
-                    <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn bg-yellow fg-blue text-bold col-xs-12', 'name' => 'contact-button']) ?>
+            <div class="item-client">
+                <div class="inner-item-client">
+                    <div class="right-client">
+                        <a href="#"><img src="images/client-img.png" alt="Client"></a>
                     </div>
-                    <?= $form->field($model, 'supplierId')->hiddenInput()->label(false) ?>
-                <?php ActiveForm::end(); ?>
-
-                <div class="ikea-actions row">
-                    <div class="contact-text col-xs-12">
-                        <br>
-                        <span class="fg-white"><?= $campaign->contact ?></span>
+                    <div class="left-client">
+                        <h3><a href="">ליה אורגד</a></h3>
+                        <span>ראש מינהל אבטחת איכות</span>
+                        <p>"לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננב" מוקו בלוקריה שיצמה ברורק. ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס. לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננב" מוקו בלוקריה שיצמה ברורק. ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס."</p>
                     </div>
                 </div>
             </div>
-
+            <div class="dots-slider">
+                <div class="inner-arrows-slider">
+                    <span class="btn-dots active"></span>
+                    <span class="btn-dots"></span>
+                    <span class="btn-dots"></span>
+                    <span class="btn-dots"></span>
+                </div>
+            </div>
         </div>
-        <p style="text-align: center; font-size: 14px; padding: 6px;">
-            <a href="https://niloosoft.com/he/" target="_blank" rel="external" style="text-decoration: none;">
-                POWERED BY NILOOSOFT HUNTER EDGE
-            </a>
-        </p>        
     </div>
 </div>
-
-<?php endif; ?>
+<div class="info-footer job-v2">
+    <div class="container">
+        <div class="social-header">
+            <span>עקבו אחרינו במדיה החברתית:</span>
+            <ul>
+                <li><a aria-label="facebook" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                <li><a aria-label="linkedin" href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="info-email">
+            <p>ליצירת קשר עם צוות הגיוס : &nbsp;&nbsp;<a href="mailto:Recruitment@elbitsystems.com">Recruitment@elbitsystems.com</a></p>
+        </div>
+        <a class="link-page" href="https://elbitsystems.com"> למעבר לאתר אלביט &gt;</a>
+    </div>
+    <a href="#" class="back-top-top">Up<i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
+</div>
