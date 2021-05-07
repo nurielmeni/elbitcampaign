@@ -49,7 +49,7 @@ class Helper
 
     public static function getObjValue($obj, $key, $default = '')
     {
-        return property_exists($obj, $key) ? htmlspecialchars($obj->$key) : $default;
+        return isset($obj->$key) ? htmlspecialchars($obj->$key) : $default;
     }
 
     public static function getArrValue($arr, $key, $default = '')

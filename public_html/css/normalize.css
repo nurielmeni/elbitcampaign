@@ -2136,6 +2136,7 @@ Menu Mobile
 }
 .job-page .step-next.pagenavis .back-step {
     margin: 0 10px;
+    white-space: nowrap;
 }
 .job-page .back-step {
     color: #004990;
@@ -2251,7 +2252,7 @@ Menu Mobile
 }
 /******************************active-tr****************************/
 .active-tr{
-    background: #ffdc2d;
+    background: #ffdc2d !important;
 }
 .box-presonal.elbit-form table tr th {
     color: #004990;
@@ -2291,6 +2292,9 @@ Menu Mobile
     vertical-align: top;
     padding-right: 10px;
     padding-left: 10px;
+}
+.box-presonal.elbit-form table tr td.second-td {
+    width: 60%;
 }
 .box-presonal.elbit-form table tr td a {
     color: #004990;

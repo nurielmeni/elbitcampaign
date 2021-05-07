@@ -6,6 +6,7 @@
 
 
 use app\widgets\youtubePlayer\YoutubePlayerWidget;
+use app\widgets\ElbitSlider\ElbitSliderWidget;
 
 $this->title = $campaign->name;
 
@@ -60,36 +61,7 @@ $this->title = $campaign->name;
         </div>
     </div>
 </div>
-<div class="section-client">
-    <div class="container">
-        <div class="slider-client">
-            <div class="arrows-slider">
-                <span class="btn-arrows next"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                <span class="btn-arrows prev"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
-            </div>
-            <div class="item-client">
-                <div class="inner-item-client">
-                    <div class="right-client">
-                        <a href="#"><img src="images/client-img.png" alt="Client"></a>
-                    </div>
-                    <div class="left-client">
-                        <h3><a href="">ליה אורגד</a></h3>
-                        <span>ראש מינהל אבטחת איכות</span>
-                        <p>"לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננב" מוקו בלוקריה שיצמה ברורק. ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס. לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננב" מוקו בלוקריה שיצמה ברורק. ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס."</p>
-                    </div>
-                </div>
-            </div>
-            <div class="dots-slider">
-                <div class="inner-arrows-slider">
-                    <span class="btn-dots active"></span>
-                    <span class="btn-dots"></span>
-                    <span class="btn-dots"></span>
-                    <span class="btn-dots"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?= ElbitSliderWidget::widget(['items' => $people]) ?>
 <div class="info-footer job-v2">
     <div class="container">
         <div class="social-header">

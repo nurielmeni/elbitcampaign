@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\FbfContactForm;
 use app\models\Campaign;
+use app\models\Team;
 use app\models\Search;
 use yii\web\UploadedFile;
 use app\controllers\ElbitController;
@@ -141,11 +142,13 @@ class SiteController extends ElbitController
         }
 
         $search = new Search($model->supplierId);
+        $team = new Team();
         
         return $this->render('contact', [
             'campaign' => $campaign,
             'model' => $model,
-            'jobs' => $search->jobs(true)
+            'jobs' => $search->jobs(true),
+            'people' => $team->find()->all(),
         ]);
     }
     
