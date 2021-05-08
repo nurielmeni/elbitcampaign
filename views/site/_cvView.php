@@ -8,19 +8,20 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'אגד - הגשת מועמדות';
+$this->title = 'אלביט - הגשת מועמדות';
 ?>
 
 <div dir="rtl">
-    <h3>קובץ קורות חיים אוטומטי - איקאה משרות</h3>
+    <h3>קובץ קורות חיים אוטומטי - אלביט משרות</h3>
     <br>
     <h4>פרטי מועמד</h4>
     <?php foreach ($model->attributes as $name => $value) : ?>
-        <?php if ($name === 'cvfile' || $name === 'supplierId' || $name === 'show_store') continue; ?>
-        <?php if ($name === 'jobTitle' && $value) : ?>
-            <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $model->getJobs(false)[$value] ?></p>
+        <?php if ($name === 'cvfile' || $name === 'supplierId' || $name === 'show_store' || $name === 'jobDetails') continue; ?>
+        <?php if ($name === 'jobTitle') : ?>
+            <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $model->jobDetails->JobTitle ?></p>
+        <?php else : ?>
+            <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $value ?></p>
         <?php endif; ?>
-        <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $value ?></p>
     <?php endforeach; ?>
-    <p><span style="font-weight: bold;">קוד משרה: </span> <?= $model->jobCode ?></p>
+    <p><span style="font-weight: bold;">קוד משרה: </span> <?= $model->jobDetails->JobCode ?></p>
 </div>

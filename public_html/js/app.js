@@ -23,14 +23,14 @@
       $(jobActiveShow).find('.job-text.location').text($(jobRow).find('td.cityname').text());
       $(jobActiveShow).find('.job-text.description').html($(jobRow).data('description') || '');
       $(jobActiveShow).find('.job-text.requirements').html($(jobRow).data('requirements') || '');
-    }else{
+    } else {
       $(jobActiveShow).find('.job-text.last-update').text('');
       $(jobActiveShow).find('.job-text.job-code').text('');
       $(jobActiveShow).find('.job-text.location').text('');
       $(jobActiveShow).find('.job-text.description').text('');
       $(jobActiveShow).find('.job-text.requirements').text('');
-    } 
-   }
+    }
+  }
 
   function jobActiveShowHandler(el) {
     var row = $(el.target).parents("tr");
@@ -48,23 +48,40 @@
     }
   }
 
+  function applyJobs(jobs) {
+    console.log('Apply jobs:', jobs);
+    if(applyJobs.length < 1 || typeof submitPopup === 'undefined') return;
+
+    submitPopup.show(jobs);
+  }
+
+  function getSelectedJobs() {
+    return $('.box-presonal table tr td input[type="checkbox"]:checked').map(function() { return this.id; }).get();
+  }
+
+  function jobsApply(activeJob) {
+    var activeJobId = activeJob.length > 0 ? activeJob[0].id : null;
+    var selectedJobs = getSelectedJobs();
+
+    if (selectedJobs.indexOf(activeJobId) === -1) {
+      selectedJobs.push(activeJobId);
+    }
+
+    applyJobs(selectedJobs);
+  }
+
   /**** EVENT HANDLERS *****/
-  $(document).on("click", "button[type='submit']", function () {
-    setTimeout(function () {
-      $(".has-error:first > input:first").focus();
-    }, 500);
+  $(document).on('click', '#job-active-show a.btn-table.download', function() {
+    var activeJob = $(this).parents('tr').siblings('.active-tr').find('td input[type="checkbox"]');
+    jobsApply(activeJob);
   });
 
-  $(document).on("change", "#contactform-store", function () {
-    $(".field-contactform-jobTitle li[store!='" + this.value + "']").hide();
-    $(".field-contactform-jobTitle li[store='" + this.value + "']").show();
-    selectFirstVisibleJob();
+  $(document).on('click', '.apply-job a.btn-table.download', function() {
+    var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
+    jobsApply(activeJob);
   });
 
-  $(document).on("nice-contactform-jobTitle-ready", function () {
-    $("#contactform-store").trigger("change");
-  });
-
+ 
   /**** READY FUNCTION ****/
   $(document).ready(function () {
     jobActiveShow = $("tr#job-active-show");
