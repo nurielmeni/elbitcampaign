@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Campaign;
 use yii\data\ActiveDataProvider;
-use app\Controllers\ElbitController;
+use app\controllers\ElbitController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
