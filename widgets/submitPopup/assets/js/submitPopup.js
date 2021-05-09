@@ -29,7 +29,7 @@ var submitPopup = (function ($) {
           required: true,
           idnumber: true
         },
-        "file": {
+        "cvfile": {
           required: true,
           filetypes: true
         }
