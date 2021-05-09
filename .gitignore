@@ -1,5 +1,5 @@
 vendor/**
-web/assets/**
+public_html/assets/**
 ./runtime/**
 config/db.php
 .cache
