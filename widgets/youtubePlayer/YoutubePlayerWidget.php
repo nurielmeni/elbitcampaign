@@ -3,7 +3,7 @@
 namespace app\widgets\YoutubePlayer;
 
 use yii\base\Widget;
-use app\widgets\YoutubePlayer\assets\YoutubePlayerAsset;
+use app\widgets\youtubePlayer\assets\YoutubePlayerAsset;
 
 class YoutubePlayerWidget extends Widget {
 
