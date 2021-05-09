@@ -3,7 +3,7 @@
 namespace app\widgets\ElbitSlider;
 
 use yii\base\Widget;
-use app\widgets\ElbitSlider\assets\ElbitSliderAsset;
+use app\widgets\elbitSlider\assets\ElbitSliderAsset;
 
 class ElbitSliderWidget extends Widget {
 
