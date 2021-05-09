@@ -23,7 +23,7 @@ class YoutubePlayerWidget extends Widget {
     }
 
     public function run() {
-        return $this->render('YoutubePlayer', [
+        return $this->render('youtubePlayer', [
             'name' => $this->name,
             'height' => $this->height,
             'width' => $this->width,
