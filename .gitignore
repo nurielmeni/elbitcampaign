@@ -2,3 +2,13 @@ vendor/**
 web/assets/**
 ./runtime/**
 config/db.php
+.cache
+.bash*
+.config
+.local
+.ssh
+.viminfo
+composer.lock
+composer.phar
+logs
+yii
