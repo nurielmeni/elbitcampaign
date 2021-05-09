@@ -11,29 +11,7 @@ use yii\helpers\ArrayHelper;
  * ContactForm is the model behind the contact form.
  */
 class ContactForm extends BaseContactForm
-{
-    public $licanse;
-    
-    /**
-     * @return array the validation rules.
-     */
-    public function rules()
-    {
-        return ArrayHelper::merge(parent::rules(), [
-            ['licanse', 'required', 'on' => 'showLicanse'],
-        ]);
-    }
-
-    /**
-     * @return array customized attribute labels
-     */
-    public function attributeLabels()
-    {
-        return ArrayHelper::merge(parent::attributeLabels(), [
-            'licanse' => Yii::t('app', 'Licanse'),
-        ]);
-    }
-    
+{     
     protected function generateNcai() {
         $xmlData = '<NiloosoftCvAnalysisInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' . "\r\n";
         $xmlData .= '  <ApplyingPerson>' . "\r\n";
@@ -66,8 +44,9 @@ class ContactForm extends BaseContactForm
         $xmlData .= '  </ApplyingPerson>' . "\r\n";
         $xmlData .= '  <Notes>' . "\r\n";
         $xmlData .=      $this->getAttributeLabel('name') . ': ' . $this->name . "\r\n";        
-        $xmlData .=      $this->getAttributeLabel('phone') . ': ' . $this->phone . "\r\n";        
-        $xmlData .=      $this->getAttributeLabel('jobTitle') . ': ' . $this->jobTitle . "\r\n";        
+        //$xmlData .=      $this->getAttributeLabel('phone') . ': ' . $this->phone . "\r\n";        
+        $xmlData .=      $this->getAttributeLabel('jobCode') . ': ' . $this->jobDetails->JobCode . "\r\n";        
+        $xmlData .=      $this->getAttributeLabel('jobTitle') . ': ' . $this->jobDetails->JobTitle . "\r\n";        
         $xmlData .= '  </Notes>' . "\r\n";        
         $xmlData .= '  <SupplierId>' . $this->supplierId . '</SupplierId>' . "\r\n";
         $xmlData .= '</NiloosoftCvAnalysisInfo>' . "\r\n";

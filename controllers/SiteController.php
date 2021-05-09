@@ -18,7 +18,7 @@ use app\controllers\ElbitController;
 class SiteController extends ElbitController
 {
     public $defaultAction = 'contact';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -105,63 +105,79 @@ class SiteController extends ElbitController
      */
     public function actionContact($id)
     {
-        $campaign = Campaign::findOne($id);
-        
-        
-        if ($campaign === null) {
-            throw new \yii\web\NotFoundHttpException(Yii::t('app', 'A campaign with this ID could not be found'));
-        }
-        
-        $now = time();
-        if ($campaign->start_date_int > $now || (isset($campaign->end_date_int) && $campaign->end_date_int < $now)) {
-            throw new \yii\web\NotFoundHttpException(Yii::t('app', 'The campaign is not active!'));
-        }
+        $campaign = $this->validCampaign($id);
+        $supplierId = Yii::$app->request->get('sid', (empty($campaign->sid) ? Yii::$app->params['supplierId'] : $campaign->sid));
+        $campaign->hits += 1;
+        $campaign->save(false, ['hits']);
 
-        if ($campaign->fbf === 0) {
-            $model = new ContactForm();
-            //if ($campaign->show_store) $model->scenario = 'showStore';
-            $model->supplierId = Yii::$app->request->get('sid', (empty($campaign->sid) ? Yii::$app->params['supplierId'] : $campaign->sid));
-        } else {
-            $model =  new FbfContactForm();
-            $model->supplierId = Yii::$app->request->get('sid', (empty($campaign->sid) ? Yii::$app->params['supplierIdFbf'] : $campaign->sid));
-        }
-        
-        if ($model->load(Yii::$app->request->post())) {
-            $model->cvfile = UploadedFile::getInstance($model, 'cvfile');
-            if ($model->cvfile) $model->upload();
-            if ($model->contact(Yii::$app->params['cvWebMail'], $this->renderPartial('_cvView', ['model' => $model]))) {
-                $campaign->apply += 1;
-                $campaign->save(false, ['apply']);
-                Yii::$app->session->setFlash('contactFormSubmitted');
-            } else {
-                Yii::$app->session->setFlash('danger', Yii::t('app', 'We are sorry, There was a problem with the application'));
-            }
-        } else {
-            $campaign->hits += 1;
-            $campaign->save(false, ['hits']);
-        }
-
-        $search = new Search($model->supplierId);
+        $search = new Search($supplierId);
         $team = new Team();
-        
+
         return $this->render('contact', [
             'campaign' => $campaign,
-            'model' => $model,
             'jobs' => $search->jobs(true),
             'people' => $team->find()->all(),
         ]);
     }
-    
-    public function actionApplicant() {
-        $request = Yii::$app->request;
-        $id = $request->post('id', '');
-        $del = $request->post('del', false);
-        $model = new FbfContactForm();
-        return $this->renderAjax('applicant', [
-            'model' => $model,
-            'id' => $id,
-            'del' => $del,
-        ]);
+
+    private function validCampaign($id)
+    {
+        $campaign = Campaign::findOne($id);
+
+        if ($campaign === null) {
+            throw new \yii\web\NotFoundHttpException(Yii::t('app', 'A campaign with this ID could not be found'));
+        }
+
+        $now = time();
+        if ($campaign->start_date_int > $now || (isset($campaign->end_date_int) && $campaign->end_date_int < $now)) {
+            throw new \yii\web\NotFoundHttpException(Yii::t('app', 'The campaign is not active!'));
+        }
+        return $campaign;
     }
-    
+
+    public function actionApply()
+    {
+        $request = Yii::$app->request;
+        $jobs = $request->post('jobs');
+        $idnumber = $request->post('idnumber');
+        $name = $request->post('name');
+
+        if (empty($jobs)) {
+            return $this->asJson(['status' => 'error', 'html' => $this->renderPartial('_errorNoJobs')]);
+            Yii::$app->end();
+        }
+
+        $jobs = explode(',', $jobs);
+
+        $campaignid = $request->post('campaignid');
+        $campaign = $this->validCampaign($campaignid);
+
+        $model = new ContactForm();
+        $model->supplierId = Yii::$app->request->get('sid', (empty($campaign->sid) ? Yii::$app->params['supplierId'] : $campaign->sid));
+        
+        $count = 0;
+        if ($model->load(Yii::$app->request->post(), '')) {
+            $model->cvfile = UploadedFile::getInstance($model, 'cvfile');
+            if ($model->cvfile) $model->upload();
+
+            foreach ($jobs as $job) {
+                $count += $this->applyJob($model, trim($job));
+            }
+
+            $model->removeTmpFiles();
+
+            $campaign->apply += $count;
+            $campaign->save(false, ['apply']);
+        }
+
+        return $this->asJson(['status' => 'success', 'html' => $this->renderPartial('_submitSuccess', ['count' => $count])]);
+    }
+
+    private function applyJob($model, $job)
+    {
+        $search = new Search($model->supplierId);
+        $model->jobDetails = $search->getJobById($job);
+
+        return $model->contact(Yii::$app->params['cvWebMail'], $this->renderPartial('_cvView', ['model' => $model]));
+    }
 }

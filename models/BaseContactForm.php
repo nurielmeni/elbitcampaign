@@ -14,13 +14,15 @@ use yii\helpers\ArrayHelper;
 class BaseContactForm extends Model
 {
     public $name;
-    public $phone;
-    public $email;
+    public $idnumber;
+    //public $phone;
+    //public $email;
     public $jobTitle;
     public $supplierId;
     public $cvfile;
     public $education;
     public $experiance;
+    public $jobDetails;
 
     public function __construct($config = array()) {
         parent::__construct($config);
@@ -37,11 +39,11 @@ class BaseContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'phone', 'jobTitle', 'cvfile'], 'required'],
-            ['email', 'email'],
+            [['name', 'idnumber', 'jobTitle', 'cvfile'], 'required'],
+            ['idnumber', 'match', 'pattern' => '/^\d{9}$/i'],
             ['supplierId', 'match', 'pattern' => '/^[a-zA-Z\d-]+$/i'],
-            [['name', 'phone'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
-            ['phone', 'match', 'pattern' => '/^0[0-9]{1,2}[-\s]{0,1}[0-9]{3}[-\s]{0,1}[0-9]{4}/i'],
+            [['name'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
+            //['phone', 'match', 'pattern' => '/^0[0-9]{1,2}[-\s]{0,1}[0-9]{3}[-\s]{0,1}[0-9]{4}/i'],
             ['cvfile', 'file', 'extensions' => ['doc', 'docx', 'pdf', 'rtf'], 'checkExtensionByMimeType' => false],
         ];
     }
@@ -52,10 +54,12 @@ class BaseContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'email' => Yii::t('app', 'Email'),
+            'name' => Yii::t('app', 'Applicant Name'),
+            'idnumber' => Yii::t('app', 'Id Number'),
+            //'phone' => Yii::t('app', 'Phone'),
+            //'email' => Yii::t('app', 'Email'),
             'jobTitle' => Yii::t('app', 'Job Title'),
+            'jobCode' => Yii::t('app', 'Job Code'),
             'searchArea' => Yii::t('app', 'Search Area'),
             'cvfile' => Yii::t('app', 'Attach CV file'),
             'supplierId' => Yii::t('app', 'Supplier Id'),
@@ -64,12 +68,9 @@ class BaseContactForm extends Model
         ];
     }
     
-    public function getJobs($withStore = true) {
+    public function getJobs() {
         $search = new Search($this->supplierId);
-        
-        return $withStore ? 
-                ArrayHelper::map($search->jobs(), 'JobId', 'JobTitle', 'RegionValue') :
-                ArrayHelper::map($search->jobs(), 'JobId', 'JobTitle');
+        ArrayHelper::map($search->jobs(), 'JobId', 'JobTitle');
     }
 
     public function getStores() {
@@ -102,7 +103,7 @@ class BaseContactForm extends Model
     public function contact($email, $content)
     {
         Yii::debug('Contact: Started', 'meni');
-        $subject = Yii::t('app', 'New request - Ikea Jobs') . ' - JB-' . $this->jobCode;
+        $subject = Yii::t('app', 'New request - Elbit Campaign') . ' [' . $this->jobDetails->JobCode . ']';
         Yii::debug('Contact: Subject ' . $subject, 'meni');
         if (!$this->cvfile || empty($this->cvfile)) {
             $this->generateCv($content);
@@ -127,13 +128,11 @@ class BaseContactForm extends Model
                 
         $res = $message->send();
 
-        $this->removeTmpFiles();
-        
         //Yii::debug("Contact: res: $res" , 'meni');
         return $res;
     }
         
-    protected function removeTmpFiles() {
+    public function removeTmpFiles() {
         foreach ($this->tmpFiles as $tmpFile) {
             unlink($tmpFile);
         }
@@ -146,7 +145,7 @@ class BaseContactForm extends Model
      */
     public function followUpMail($content)
     {
-        $subject = 'אתר משרות איקאה - בקשתך התקבלה';
+        $subject = 'אתר משרות אלביט - בקשתך התקבלה';
             return Yii::$app->mailer->compose()
                 ->setTo($this->email)
                 ->setFrom([Yii::$app->params['fromMail'] => Yii::$app->params['fromName']])
@@ -175,10 +174,10 @@ class BaseContactForm extends Model
             // any css to be embedded if required
             'cssInline' => '.kv-heading-1{font-size:18px}', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'איקאה - קובץ קורות חיים אוטומטי'],
+            'options' => ['title' => 'אלביט - קובץ קורות חיים אוטומטי'],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['איקאה - קורות חיים למועמד'], 
+                'SetHeader'=>['אלביט - קורות חיים למועמד'], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);

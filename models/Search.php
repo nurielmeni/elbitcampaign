@@ -214,6 +214,10 @@ class Search extends Model {
         return $this->niloos->jobsGetByFilter($filter, $cacheKey);
     }
     
+    public function getJobById($id) {
+        return $this->niloos->jobGetConsideringIsDiscreetFiled($id); 
+    }
+
     public function jobs($full = false) {
         $filter = [
             'transactionCode' => Helper::newGuid(),

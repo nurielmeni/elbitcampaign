@@ -6,7 +6,8 @@
 
 
 use app\widgets\youtubePlayer\YoutubePlayerWidget;
-use app\widgets\ElbitSlider\ElbitSliderWidget;
+use app\widgets\elbitSlider\ElbitSliderWidget;
+use app\widgets\submitPopup\SubmitPopupWidget;
 
 $this->title = $campaign->name;
 
@@ -16,6 +17,8 @@ $this->title = $campaign->name;
     'playButtonId' => 'youtube-player-button',
     'videoId' => $campaign->youtube_video_id
     ]) ?>
+
+<?= SubmitPopupWidget::widget(['campaignId' => $campaign->id]) ?> 
 
 <div class="header header-v2">
     <div class="logo-v2">
