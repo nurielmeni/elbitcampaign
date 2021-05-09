@@ -4,7 +4,7 @@ namespace app\widgets\SubmitPopup;
 
 use yii\base\Widget;
 use yii\helpers\Url;
-use app\widgets\SubmitPopup\assets\SubmitPopupAsset;
+use app\widgets\submitPopup\assets\SubmitPopupAsset;
 
 class SubmitPopupWidget extends Widget {
 
