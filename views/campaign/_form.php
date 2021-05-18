@@ -42,7 +42,7 @@ use yii\web\View;
             ['bold', 'italic', 'underline'], 
             [['color' => []], ['background' => []]],
             [['align' => []]],
-            [['direction' => ['rtl', 'ltr']]],
+            ['direction' => 'rtl'],
             [[ 'size' => ['small', 'medium', 'large', 'huge'] ]],
             [[ 'header' => [1, 2, 3, 4, 5, 6, false] ]],
         ],
