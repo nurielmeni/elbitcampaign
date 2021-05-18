@@ -40,9 +40,10 @@ use yii\web\View;
     <?= $form->field($model, 'campaign')->widget(\bizley\quill\Quill::className(), [
         'toolbarOptions' => [
             ['bold', 'italic', 'underline'], 
-            [['color' => []]],
+            [['color' => []], ['background' => []]],
             [['align' => []]],
-            [[ 'size' => ['small', 'medium', 'large', 'huge'] ]],
+            [['direction'] => ['rtl', 'ltr']],
+            [[ 'size' => ['18px', '24px', '36px', '48px', '54px', '72px'] ]],
             [[ 'header' => [1, 2, 3, 4, 5, 6, false] ]],
         ],
         'options' => [
