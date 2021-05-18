@@ -1,81 +1,85 @@
 /** RESPONSIVE CSS **/
 @media all and (max-width: 960px) {
-    #job-results tr.tr-title {
-        display: none;
-    }
+  #job-results tr.tr-title {
+    display: none;
+  }
 
-    #job-results tr {
-        border-top: 1px solid #dadcc4;
-    }
+  #job-results tr {
+    border-top: 1px solid #dadcc4;
+  }
 
-    #job-results tr:last-child {
-        border-bottom: 1px solid #dadcc4;
-    }
+  #job-results tr:last-child {
+    border-bottom: 1px solid #dadcc4;
+  }
 
-    #job-results tr td{
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        box-sizing: border-box;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-    #job-active-show td > * {
-        width: 100%;
-    }
+  #job-results tr td {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  #job-active-show td > * {
+    width: 100%;
+  }
 
-    #job-active-show .btn-table.download {
-        margin-top: 30px;
-    }
+  #job-active-show .btn-table.download {
+    margin-top: 30px;
+  }
 
-    #job-results tr td.apply-job {
-        justify-content: space-between;
-    }
+  #job-results tr td.apply-job {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 1000px) {
-    .video-yotube {
-        text-align: center;
-        margin-top: 0;
-        padding-top: 20px;
-        padding-bottom: 10px;
-    }
-    .video-yotube:before {
-        position: absolute;
-        content: "";
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        background: #004990;
-        opacity: 0.7;
-    }
+  .video-yotube {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+  .video-yotube:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #004990;
+    opacity: 0.7;
+  }
 
-    .inner-banner {
-        max-width: 800px;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .inner-banner {
+    max-width: 800px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .banner img.banner-desktop {
-        display: none;
-    }
+  .banner img.banner-desktop {
+    display: none;
+  }
 
-    .banner img.banner-mobile {
-        display: block;
-    }
+  .banner img.banner-mobile {
+    display: block;
+    object-fit: cover;
+    max-height: 400px;
+  }
 }
 
 @media (min-width: 1000.1px) {
-    .banner img.banner-desktop {
-        display: block;
-    }
-    
-    .banner img.banner-mobile {
-        display: none;
-    }
-    
+  .banner img.banner-desktop {
+    display: block;
+    object-fit: scale-down;
+    max-height: 550px;
+    object-position: left;
+  }
+
+  .banner img.banner-mobile {
+    display: none;
+  }
 }
