@@ -47,7 +47,7 @@
       $(jobActiveShow).hide().insertAfter(row).fadeIn(600);
 
       // 4. Replace the button to close
-      $(el).hide().siblings('a').show();
+      $(el.target).parents('tr').find('a.btn-table.download').hide().siblings('a').show();
     }
   }
 
