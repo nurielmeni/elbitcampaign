@@ -56,6 +56,11 @@
   .banner.banner-v2 .container {
     margin-top: 60px;
     position:relative !important;
+    position: absolute;
+    margin-top: -200px;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
   }
 
   .inner-banner {
