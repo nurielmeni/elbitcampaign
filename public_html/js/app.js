@@ -45,6 +45,9 @@
 
       // 3. Show the details section below the row
       $(jobActiveShow).hide().insertAfter(row).fadeIn(600);
+
+      // 4. Replace the button to close
+      $(el).hide().siblings('a').show();
     }
   }
 
@@ -82,11 +85,18 @@
     jobsApply(activeJob);
   });
 
+  $document.on('click', '.apply-job a.btn-table.close', function(e) {
+    e.preventDefault();
+    $(jobActiveShow).hide();
+    $(this).hide().siblings('a').show();
+  });
+
  
   /**** READY FUNCTION ****/
   $(document).ready(function () {
     jobActiveShow = $("tr#job-active-show");
     $(jobActiveShow).hide();
+    $('.apply-job a.btn-table.close').hide();
 
     // Handler show active job details
     $(".show-job-details").on("click", jobActiveShowHandler.bind(this));
