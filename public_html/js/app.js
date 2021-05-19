@@ -63,7 +63,7 @@
     var activeJobId = activeJob.length > 0 ? activeJob[0].id : null;
     var selectedJobs = getSelectedJobs();
 
-    if (selectedJobs.indexOf(activeJobId) === -1) {
+    if (activeJobId && selectedJobs.indexOf(activeJobId) === -1) {
       selectedJobs.push(activeJobId);
     }
 
