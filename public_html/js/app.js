@@ -85,7 +85,7 @@
     jobsApply(activeJob);
   });
 
-  $(document).on('click', '.apply-job a.btn-table.download.close', function(e) {
+  $(document).on('click', '.apply-job a.btn-table.download.close-details', function(e) {
     e.preventDefault();
     $(jobActiveShow).hide();
     $(this).hide().siblings('a').show().parents('tr').removeClass('active-tr');
@@ -96,7 +96,7 @@
   $(document).ready(function () {
     jobActiveShow = $("tr#job-active-show");
     $(jobActiveShow).hide();
-    $('.apply-job a.btn-table.download.close').hide();
+    $('.apply-job a.btn-table.download.close-details').hide();
 
     // Handler show active job details
     $(".show-job-details").on("click", jobActiveShowHandler.bind(this));
