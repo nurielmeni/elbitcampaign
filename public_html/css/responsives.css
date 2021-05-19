@@ -53,6 +53,10 @@
     opacity: 0.7;
   }
 
+  .banner.banner-v2 .container {
+    margin-top: 60px;
+  }
+
   .inner-banner {
     max-width: 800px;
     width: 80%;
