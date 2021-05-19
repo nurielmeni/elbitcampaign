@@ -76,7 +76,8 @@
     jobsApply(activeJob);
   });
 
-  $(document).on('click', '.apply-job a.btn-table.download', function() {
+  $(document).on('click', '.apply-job a.btn-table.download, .step-next.pagenavis .back-stepv2', function(e) {
+    e.preventdefault();
     var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
     jobsApply(activeJob);
   });
