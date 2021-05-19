@@ -47,7 +47,7 @@
       $(jobActiveShow).hide().insertAfter(row).fadeIn(600);
 
       // 4. Replace the button to close
-      $(el.target).parents('tr').find('a.btn-table.download').hide().siblings('a').show();
+      $(el.target).parents('tr').find('a.btn-table.download.apply').hide().siblings('a').show();
     }
   }
 
@@ -74,21 +74,21 @@
   }
 
   /**** EVENT HANDLERS *****/
-  $(document).on('click', '#job-active-show a.btn-table.download', function() {
+  $(document).on('click', '#job-active-show a.btn-table.download.apply', function() {
     var activeJob = $(this).parents('tr').siblings('.active-tr').find('td input[type="checkbox"]');
     jobsApply(activeJob);
   });
 
-  $(document).on('click', '.apply-job a.btn-table.download, .step-next.pagenavis .back-stepv2', function(e) {
+  $(document).on('click', '.apply-job a.btn-table.download.apply, .step-next.pagenavis .back-stepv2', function(e) {
     e.preventDefault();
     var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
     jobsApply(activeJob);
   });
 
-  $(document).on('click', '.apply-job a.btn-table.close', function(e) {
+  $(document).on('click', '.apply-job a.btn-table.download.close', function(e) {
     e.preventDefault();
     $(jobActiveShow).hide();
-    $(this).hide().siblings('a').show();
+    $(this).hide().siblings('a').show().parents('tr').removeClass('active-tr');
   });
 
  
@@ -96,7 +96,7 @@
   $(document).ready(function () {
     jobActiveShow = $("tr#job-active-show");
     $(jobActiveShow).hide();
-    $('.apply-job a.btn-table.close').hide();
+    $('.apply-job a.btn-table.download.close').hide();
 
     // Handler show active job details
     $(".show-job-details").on("click", jobActiveShowHandler.bind(this));

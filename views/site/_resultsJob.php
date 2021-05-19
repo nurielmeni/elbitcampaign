@@ -27,8 +27,8 @@ use app\helpers\Helper;
         <td data-title="אזור גאוגרפי: " class="show-job-details"><?= Helper::getArrValue($job, 'RegionText') ?></td>
         <td class="apply-job" data-title="מיקום/עיר">
             <span class="show-job-details cityname"><?= Helper::getArrValue($job, 'CityName') ?></span>
-            <a href="#" job-id="<?= Helper::getArrValue($job, 'JobId') ?>" class="btn-table download">הגשת קו"ח ></a>
-            <a href="#" style="display: none;" class="btn-table close">סגור</a>
+            <a href="#" job-id="<?= Helper::getArrValue($job, 'JobId') ?>" class="btn-table download apply">הגשת קו"ח ></a>
+            <a href="#" style="display: none;" class="btn-table download close">סגור</a>
         </td>
     </tr>
 <?php endif ?>
