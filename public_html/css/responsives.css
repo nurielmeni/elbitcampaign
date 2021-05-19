@@ -66,7 +66,7 @@
   .banner img.banner-mobile {
     display: block;
     object-fit: cover;
-    max-height: 400px;
+    height: 400px;
   }
 }
 
