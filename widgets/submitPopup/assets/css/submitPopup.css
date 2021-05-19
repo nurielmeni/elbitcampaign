@@ -52,7 +52,8 @@ and open the template in the editor.
     transform: translateY(-50%);
     left: 0;
     right: 0;
-    width: 520px;
+    max-width: 520px;
+    width: 92%;
     min-height: 400px;
     background: #fff;
     margin: 20px auto;
@@ -226,4 +227,11 @@ div.form-field label.error {
     left: 0;
     color: #bd4b4b;
     font-size: small;
+}
+
+@media (max-width: 600px) {
+    .close-popup {
+        top: -40px;
+        right: 10px;
+    }
 }
