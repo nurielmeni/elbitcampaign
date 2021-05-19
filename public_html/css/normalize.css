@@ -1932,7 +1932,7 @@ Menu Mobile
 .inner-video-yotube {
     display: inline-block;
     position: relative;
-    width: 425px;
+    max-width: 425px;
     z-index: 500;
 }
 .inner-video-yotube > img {
