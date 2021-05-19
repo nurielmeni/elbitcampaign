@@ -55,6 +55,7 @@
 
   .banner.banner-v2 .container {
     margin-top: 60px;
+    position:relative !important;
   }
 
   .inner-banner {
