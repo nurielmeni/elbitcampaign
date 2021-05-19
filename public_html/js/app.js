@@ -43,6 +43,9 @@
       // 2. Add style class
       $(row).addClass('active-tr').siblings('tr').removeClass('active-tr');
 
+      // 2a.Remove the close button
+      $(jobActiveShow).prev('tr').find('a.btn-table.download.close-apply').hide().siblings('a').show(); 
+
       // 3. Show the details section below the row
       $(jobActiveShow).hide().insertAfter(row).fadeIn(600);
 
