@@ -77,7 +77,7 @@
   });
 
   $(document).on('click', '.apply-job a.btn-table.download, .step-next.pagenavis .back-stepv2', function(e) {
-    e.preventdefault();
+    e.preventDefault();
     var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
     jobsApply(activeJob);
   });
