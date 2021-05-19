@@ -85,7 +85,7 @@
     jobsApply(activeJob);
   });
 
-  $document.on('click', '.apply-job a.btn-table.close', function(e) {
+  $(document).on('click', '.apply-job a.btn-table.close', function(e) {
     e.preventDefault();
     $(jobActiveShow).hide();
     $(this).hide().siblings('a').show();
