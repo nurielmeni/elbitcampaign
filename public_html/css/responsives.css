@@ -68,6 +68,12 @@
     object-fit: cover;
     height: 400px;
   }
+
+  #job-results tr td.jobcode,
+  #job-results tr td.region {
+    display: none;
+  }
+
 }
 
 @media (min-width: 1000.1px) {

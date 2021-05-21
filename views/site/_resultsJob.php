@@ -24,7 +24,7 @@ use app\helpers\Helper;
             </div>
         </td>
         <td data-title="קוד משרה: " class="show-job-details jobcode"><?= Helper::getArrValue($job, 'JobCode') ?></td>
-        <td data-title="אזור גאוגרפי: " class="show-job-details"><?= Helper::getArrValue($job, 'RegionText') ?></td>
+        <td data-title="אזור גאוגרפי: " class="show-job-details region"><?= Helper::getArrValue($job, 'RegionText') ?></td>
         <td class="apply-job" data-title="מיקום/עיר">
             <span class="show-job-details cityname"><?= Helper::getArrValue($job, 'CityName') ?></span>
             <a href="#" job-id="<?= Helper::getArrValue($job, 'JobId') ?>" class="btn-table download apply">הגשת קו"ח ></a>
