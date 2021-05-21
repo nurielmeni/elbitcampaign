@@ -19,8 +19,8 @@ return [
     'cvWebMail' => 'elbitsystems@cvwebmail.com',
     'cvWebMailName' => 'Elbit Campaign Site',
     'maxNumberOfJobs' => 10,
-    'facebook' => '',
-    'instagram' => '',
+    'facebook' => 'https://www.facebook.com/Elbitsystems',
+    'instagram' => 'https://il.linkedin.com/company/elbit-systems-ltd',
     'elbitSite' => 'https://elbitsystems.com/',
     'recruitersMail' => 'Recruitment@elbitsystems.com',
 ];

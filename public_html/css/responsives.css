@@ -1,4 +1,11 @@
 /** RESPONSIVE CSS **/
+@media all and (max-width: 767.9px) {
+  .job-page .step-next.pagenavis .back-step {
+    font-size: 16px;
+    margin-top: 6px;
+  }
+}
+
 @media all and (max-width: 960px) {
   #job-results tr.tr-title {
     display: none;
@@ -43,7 +50,7 @@
 
   .banner.banner-v2 .container {
     margin-top: 60px;
-    position:relative !important;
+    position: relative !important;
     position: absolute;
     margin-top: -300px;
     -webkit-transform: translateY(0);
@@ -73,7 +80,6 @@
   #job-results tr td.region {
     display: none;
   }
-
 }
 
 @media (min-width: 1000.1px) {

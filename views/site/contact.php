@@ -77,7 +77,6 @@ $this->title = $campaign->name;
         <div class="info-email">
             <p>ליצירת קשר עם צוות הגיוס : &nbsp;&nbsp;<a href="mailto:Recruitment@elbitsystems.com">Recruitment@elbitsystems.com</a></p>
         </div>
-        <a class="link-page" href="https://elbitsystems.com"> למעבר לאתר אלביט &gt;</a>
     </div>
     <a href="#" class="back-top-top">Up<i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
 </div>
