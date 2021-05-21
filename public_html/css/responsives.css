@@ -38,6 +38,11 @@
   #job-results tr td.apply-job {
     justify-content: space-between;
   }
+
+  #job-results tr td.jobcode,
+  #job-results tr td.region {
+    display: none;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -74,11 +79,6 @@
     display: block;
     object-fit: cover;
     height: 400px;
-  }
-
-  #job-results tr td.jobcode,
-  #job-results tr td.region {
-    display: none;
   }
 }
 
