@@ -70,8 +70,8 @@ $this->title = $campaign->name;
         <div class="social-header">
             <span>עקבו אחרינו במדיה החברתית:</span>
             <ul>
-                <li><a aria-label="facebook" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
-                <li><a aria-label="linkedin" href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                <li><a aria-label="facebook" href="<?= Yii::$app->params['facebook'] ?>"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                <li><a aria-label="linkedin" href="<?= Yii::$app->params['linkedin'] ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
             </ul>
         </div>
         <div class="info-email">
