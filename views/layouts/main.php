@@ -24,7 +24,7 @@ AppAssetCampaign::register($this);
     <meta property="og:title" content="Elbit" />
     <meta property="og:description" content="" />
     <meta property="og:locale" content="he_IL" />
-    <meta property="og:image" content="<?= Url::to('@web/uploads/images/logo-v2.png') ?>" />
+    <meta property="og:image" content="<?= Url::to('@web/uploads/images/ogimage.png') ?>" />
 
     <!-- GOOGLE FONTS HEEBO -->
 	<link href="https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900&display=swap&subset=hebrew" rel="stylesheet">
