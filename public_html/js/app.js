@@ -33,6 +33,9 @@
   }
 
   function jobActiveShowHandler(el) {
+    el.stopImmediatePropagation();
+    el.stopPropagation();
+    el.preventDefault();
     var row = $(el.target).parents("tr");
     if (row.length < 1) return;
 
