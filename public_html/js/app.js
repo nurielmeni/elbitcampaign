@@ -36,6 +36,11 @@
     var row = $(el.target).parents("tr");
     if (row.length < 1) return;
 
+    if ($(row).hasClass('active-tr')) {
+      $(row).find('a.btn-table.download.close-details').trigger('click');
+      return;
+    }
+
     if (!$("tr#job-active-show").is(":visible") || $(jobActiveShow).prev("tr")[0] !== row[0]) {
       // 1. Update details of current job
       setJobDetails(row);
@@ -96,11 +101,6 @@
     $(this).hide().siblings('a').show().parents('tr').removeClass('active-tr');
   });
 
-
-
-
-
- 
   /**** READY FUNCTION ****/
   $(document).ready(function () {
     jobActiveShow = $("tr#job-active-show");
