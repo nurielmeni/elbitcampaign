@@ -96,13 +96,7 @@
     $(this).hide().siblings('a').show().parents('tr').removeClass('active-tr');
   });
 
-  $(document).on('click', '#job-results tr.active-tr', function(e) {
-    e.stopImmediatePropagation();
-    e.stopPropagation();
-    e.preventDefault();
-    $(jobActiveShow).hide();
-    $(this).removeClass('active-tr').find('td.apply-job a.apply').show().siblings('a').hide();
-  });
+
 
 
 
