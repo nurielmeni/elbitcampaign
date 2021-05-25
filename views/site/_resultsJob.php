@@ -11,6 +11,7 @@ use app\helpers\Helper;
  * 'RegionValue', 
  * 'RegionText',
  * 'UpdateDate',
+ * data-lastupdate="LastUpdate"
  * */
 ?>
 
@@ -20,7 +21,6 @@ use app\helpers\Helper;
         data-requirements="<?= Helper::getArrValue($job, 'Requiremets') ?>"
         data-jobcode="<?= Helper::getArrValue($job, 'JobCode') ?>"
         data-cityname="<?= Helper::getArrValue($job, 'CityName') ?>"
-        data-lastupdate="<?= Helper::getArrValue($job, 'LastUpdate') ?>"
     >
         <td>
             <div class="checkbox">

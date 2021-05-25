@@ -1,6 +1,5 @@
 <tr id="job-active-show" class="active-show">
     <td class="first-td">
-        <p class="job-data"><b><?= Yii::t('app', 'Last Update') ?></b><span class="job-text last-update"></span></p>
         <p class="job-data"><b><?= Yii::t('app', 'Job Code') ?></b><span class="job-text job-code"></span></p>
         <p class="job-data"><b><?= Yii::t('app', 'Location') ?></b><span class="job-text location"></span></p>
     </td>
