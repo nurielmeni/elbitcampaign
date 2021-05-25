@@ -18,9 +18,9 @@
 
   function setJobDetails(jobRow) {
     if (jobRow) {
-      $(jobActiveShow).find('.job-text.last-update').text($(jobRow).data('last-update') || '');
-      $(jobActiveShow).find('.job-text.job-code').text($(jobRow).find('td.jobcode').text());
-      $(jobActiveShow).find('.job-text.location').text($(jobRow).find('td.cityname').text());
+      $(jobActiveShow).find('.job-text.last-update').text($(jobRow).data('lastupdate') || '');
+      $(jobActiveShow).find('.job-text.last-update').text($(jobRow).data('cityname') || '');
+      $(jobActiveShow).find('.job-text.last-update').text($(jobRow).data('jobcode') || '');
       $(jobActiveShow).find('.job-text.description').html($(jobRow).data('description') || '');
       $(jobActiveShow).find('.job-text.requirements').html($(jobRow).data('requirements') || '');
     } else {

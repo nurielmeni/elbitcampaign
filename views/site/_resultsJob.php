@@ -15,7 +15,13 @@ use app\helpers\Helper;
 ?>
 
 <?php if (isset($job)) : ?>
-    <tr data-description="<?= Helper::getArrValue($job, 'Description') ?>" data-requirements="<?= Helper::getArrValue($job, 'Requiremets') ?>">
+    <tr 
+        data-description="<?= Helper::getArrValue($job, 'Description') ?>" 
+        data-requirements="<?= Helper::getArrValue($job, 'Requiremets') ?>"
+        data-jobcode="<?= Helper::getArrValue($job, 'JobCode') ?>"
+        data-cityname="<?= Helper::getArrValue($job, 'CityName') ?>"
+        data-lastupdate="<?= Helper::getArrValue($job, 'LastUpdate') ?>"
+    >
         <td>
             <div class="checkbox">
                 <input type="checkbox" id="<?= Helper::getArrValue($job, 'JobId') ?>" name="<?= Helper::getArrValue($job, 'JobId') ?>" value="<?= Helper::getArrValue($job, 'JobTitle') ?>">
