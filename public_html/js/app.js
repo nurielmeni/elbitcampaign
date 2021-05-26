@@ -90,11 +90,18 @@
     jobsApplyWithSelected(activeJob);
   });
 
-  $(document).on('click', '#apply-jobs', function(e) {
+  $(document).on('click', '#job-results .apply-job a.apply', function(e) {
     e.preventDefault();
     var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
     jobsApplyWithSelected(activeJob);
   });
+
+  $(document).on('click', '#apply-jobs', function(e) {
+    e.preventDefault();
+    var activeJob = []; // empty job
+    jobsApplyWithSelected(activeJob);
+  });
+
 
   $(document).on('click', '#apply-general', function(e) {
     e.preventDefault();
