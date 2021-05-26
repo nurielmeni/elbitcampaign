@@ -58,8 +58,8 @@ $this->title = $campaign->name;
                 </table>
             </form>
             <div class="step-next pagenavis">
-                <a href="#" class="back-step">הגש/י קורות חיים למאגר הכללי ></a>
-                <a href="#" class="back-step back-stepv2">הגש/י קורות חיים למשרות המסומנות > </a>
+                <a href="#" id="apply-general" class="back-step">הגש/י קורות חיים למאגר הכללי ></a>
+                <a href="#" id="apply-jobs" class="back-step back-stepv2">הגש/י קורות חיים למשרות המסומנות > </a>
             </div>
         </div>
     </div>

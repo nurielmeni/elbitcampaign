@@ -95,7 +95,9 @@ var submitPopup = (function ($) {
   }
 
   function show(selectedJobs) {
-    if(!Array.isArray(selectedJobs) || selectedJobs.length === 0) return;
+    // selectedJobs: null, submit general
+    if (selectedJobs !== null && (!Array.isArray(selectedJobs) || selectedJobs.length === 0)) return;
+    
     jobs = selectedJobs;
     $(elbitPopupModal).hide();
     $('#apply-response').remove();

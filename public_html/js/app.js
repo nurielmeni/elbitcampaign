@@ -64,7 +64,7 @@
 
   function applyJobs(jobs) {
     console.log('Apply jobs:', jobs);
-    if(applyJobs.length < 1 || typeof submitPopup === 'undefined') return;
+    if(typeof submitPopup === 'undefined') return;
 
     submitPopup.show(jobs);
   }
@@ -73,7 +73,7 @@
     return $('.box-presonal table tr td input[type="checkbox"]:checked').map(function() { return this.id; }).get();
   }
 
-  function jobsApply(activeJob) {
+  function jobsApplyWithSelected(activeJob) {
     var activeJobId = activeJob.length > 0 ? activeJob[0].id : null;
     var selectedJobs = getSelectedJobs();
 
@@ -87,13 +87,18 @@
   /**** EVENT HANDLERS *****/
   $(document).on('click', '#job-active-show a.btn-table.download.apply', function() {
     var activeJob = $(this).parents('tr').siblings('.active-tr').find('td input[type="checkbox"]');
-    jobsApply(activeJob);
+    jobsApplyWithSelected(activeJob);
   });
 
-  $(document).on('click', '.apply-job a.btn-table.download.apply, .step-next.pagenavis .back-stepv2', function(e) {
+  $(document).on('click', '#apply-jobs', function(e) {
     e.preventDefault();
     var activeJob = $(this).parents('tr').find('td input[type="checkbox"]');
-    jobsApply(activeJob);
+    jobsApplyWithSelected(activeJob);
+  });
+
+  $(document).on('click', '#apply-general', function(e) {
+    e.preventDefault();
+    applyJobs(null);
   });
 
   $(document).on('click', '.apply-job a.btn-table.download.close-details', function(e) {

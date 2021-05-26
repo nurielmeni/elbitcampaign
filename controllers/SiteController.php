@@ -147,7 +147,7 @@ class SiteController extends ElbitController
             Yii::$app->end();
         }
 
-        $jobs = explode(',', $jobs);
+        $jobs = $jobs === "null" ? [] : explode(',', $jobs);
 
         $campaignid = $request->post('campaignid');
         $campaign = $this->validCampaign($campaignid);
@@ -160,8 +160,12 @@ class SiteController extends ElbitController
             $model->cvfile = UploadedFile::getInstance($model, 'cvfile');
             if ($model->cvfile) $model->upload();
 
-            foreach ($jobs as $job) {
-                $count += $this->applyJob($model, trim($job));
+            if (count($jobs) === 0) {
+                $count += $this->applyJob($model);
+            } else {
+                foreach ($jobs as $job) {
+                    $count += $this->applyJob($model, trim($job));
+                }
             }
 
             $model->removeTmpFiles();
@@ -170,14 +174,22 @@ class SiteController extends ElbitController
             $campaign->save(false, ['apply']);
         }
 
-        return $this->asJson(['status' => 'success', 'html' => $this->renderPartial('_submitSuccess', ['count' => $count])]);
+        return count($jobs) === 0
+            ? $this->asJson(['status' => 'success', 'html' => $this->renderPartial('_submitGeneralSuccess')])
+            : $this->asJson(['status' => 'success', 'html' => $this->renderPartial('_submitSuccess', ['count' => $count])]);
     }
 
-    private function applyJob($model, $job)
+    private function applyJob($model, $job = null)
     {
-        $search = new Search($model->supplierId);
-        $model->jobDetails = $search->getJobById($job);
+        if ($job) {
+            $search = new Search($model->supplierId);
+            $model->jobDetails = $search->getJobById($job);
+        } else {
+            $model->jobDetails = null;
+        }
 
-        return $model->contact(Yii::$app->params['cvWebMail'], $this->renderPartial('_cvView', ['model' => $model]));
+        return $model->contact(Yii::$app->params['cvWebMail'], $this->renderPartial('_cvView', [
+            'model' => $model,
+        ]));
     }
 }

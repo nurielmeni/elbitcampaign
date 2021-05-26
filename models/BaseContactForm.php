@@ -103,7 +103,11 @@ class BaseContactForm extends Model
     public function contact($email, $content)
     {
         Yii::debug('Contact: Started', 'meni');
-        $subject = Yii::t('app', 'New request - Elbit Campaign') . ' [' . $this->jobDetails->JobCode . ']';
+        if ($this->jobDetails) {
+            $subject = Yii::t('app', 'New request - Elbit Campaign') . ' [' . $this->jobDetails->JobCode . ']';
+        } else {
+            $subject = Yii::t('app', 'New request - Elbit Campaign') . ' [הגשה למאגר הכללי]';
+        }
         Yii::debug('Contact: Subject ' . $subject, 'meni');
         if (!$this->cvfile || empty($this->cvfile)) {
             $this->generateCv($content);

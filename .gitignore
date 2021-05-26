@@ -1,4 +1,5 @@
 vendor/**
+public_html/index.php
 public_html/assets/**
 ./runtime/**
 config/db.php

@@ -17,11 +17,14 @@ $this->title = 'אלביט - הגשת מועמדות';
     <h4>פרטי מועמד</h4>
     <?php foreach ($model->attributes as $name => $value) : ?>
         <?php if ($name === 'cvfile' || $name === 'supplierId' || $name === 'show_store' || $name === 'jobDetails') continue; ?>
-        <?php if ($name === 'jobTitle') : ?>
+        <?php if ($model->jobDetails && $name === 'jobTitle') : ?>
             <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $model->jobDetails->JobTitle ?></p>
         <?php else : ?>
             <p><span style="font-weight: bold;"><?= $model->getAttributeLabel($name) ?>: </span> <?= $value ?></p>
         <?php endif; ?>
     <?php endforeach; ?>
-    <p><span style="font-weight: bold;">קוד משרה: </span> <?= $model->jobDetails->JobCode ?></p>
+
+    <?php if($model->jobDetails) : ?>
+        <p><span style="font-weight: bold;">קוד משרה: </span> <?= $model->jobDetails->JobCode ?></p>
+    <?php endif; ?>
 </div>

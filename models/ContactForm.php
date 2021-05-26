@@ -44,9 +44,11 @@ class ContactForm extends BaseContactForm
         $xmlData .= '  </ApplyingPerson>' . "\r\n";
         $xmlData .= '  <Notes>' . "\r\n";
         $xmlData .=      $this->getAttributeLabel('name') . ': ' . $this->name . "\r\n";        
-        //$xmlData .=      $this->getAttributeLabel('phone') . ': ' . $this->phone . "\r\n";        
-        $xmlData .=      $this->getAttributeLabel('jobCode') . ': ' . $this->jobDetails->JobCode . "\r\n";        
-        $xmlData .=      $this->getAttributeLabel('jobTitle') . ': ' . $this->jobDetails->JobTitle . "\r\n";        
+        $xmlData .=      $this->getAttributeLabel('idnumber') . ': ' . $this->idnumber . "\r\n";  
+        if($this->jobDetails) {
+            $xmlData .=      $this->getAttributeLabel('jobCode') . ': ' . $this->jobDetails->JobCode . "\r\n";        
+            $xmlData .=      $this->getAttributeLabel('jobTitle') . ': ' . $this->jobDetails->JobTitle . "\r\n";        
+        }      
         $xmlData .= '  </Notes>' . "\r\n";        
         $xmlData .= '  <SupplierId>' . $this->supplierId . '</SupplierId>' . "\r\n";
         $xmlData .= '</NiloosoftCvAnalysisInfo>' . "\r\n";

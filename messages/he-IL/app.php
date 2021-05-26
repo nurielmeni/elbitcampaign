@@ -46,6 +46,7 @@ return [
     'Select at least one job.' => 'יש לבחור לפחות משרה אחת.',
     'CV Submitted Successfuly' => 'קורות החיים נשלחו בהצלחה',
     'The Cv were submited successfuly to {count} jobs.' => 'קורות החיים נשלחו בהצלחה ל- {count} משרות.',
+    'The Cv were submited to the general jobs' => 'קורות החיים נשלחו למאגר הכללי.',
     'Job Title' => 'משרה',
     'Job Code' => 'קוד משרה',
 ];
