@@ -1165,8 +1165,8 @@ a {
 .info-footer .social-header ul li a {
   font-size: 30px;
 }
-.info-footer .social-header {
-  margin-left: 40px;
+.info-footer p {
+  text-align: center;
 }
 /*****************footer**************************/
 .footer {
