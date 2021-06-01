@@ -39,6 +39,8 @@ and open the template in the editor.
   vertical-align: middle;
   width: 60%;
   margin-top: 40px;
+  height: 220px;
+  overflow: auto;
 }
 .left-client h3 {
   margin: 0;
