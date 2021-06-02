@@ -1940,20 +1940,7 @@ Menu Mobile
 .banner.banner-v2 .container {
   top: 55%;
 }
-.banner.banner-v2 h1 {
-  color: #ffffff;
-  font-size: 60px;
-  margin: 0;
-  line-height: 58px;
-  font-weight: 400;
-}
-.banner.banner-v2 h1 span {
-  color: #ffffff;
-  font-size: 36px;
-  line-height: 45px;
-  display: block;
-  margin: 0 0 12px;
-}
+
 .inner-banner {
   max-width: calc(100% - 500px);
   text-align: right;
