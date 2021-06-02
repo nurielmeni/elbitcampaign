@@ -716,13 +716,7 @@ body {
   text-align: center;
   z-index: 9;
 }
-.banner h1 {
-  color: #ffffff;
-  font-size: 76px;
-  margin: 0;
-  line-height: 75px;
-  font-weight: 300;
-}
+
 .banner form {
   max-width: 720px;
   margin: 15px auto 0;
