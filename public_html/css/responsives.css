@@ -62,6 +62,7 @@
     -ms-transform: translateY(0);
     transform: translateY(0);
     padding-bottom: 0;
+    overflow: hidden;
   }
 
   .inner-banner {
@@ -83,6 +84,10 @@
 }
 
 @media (min-width: 1000.1px) {
+  .banner.banner-v2 .container {
+    font-size: 1.3rem;
+  }
+
   .banner img.banner-desktop {
     display: block;
     object-fit: scale-down;
