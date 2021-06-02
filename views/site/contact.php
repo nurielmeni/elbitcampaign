@@ -29,7 +29,7 @@ $this->title = $campaign->name;
 <div class="banner banner-v2">
     <img class="banner-desktop" src="<?= $campaign->image ?>" alt="Banner">
     <img class="banner-mobile" src="<?= $campaign->mobile_image ?>" alt="Banner">
-    <div class="container">
+    <div class="container ql-editor">
         <div class="inner-banner">
             <?= $campaign->campaign ?>
         </div>
