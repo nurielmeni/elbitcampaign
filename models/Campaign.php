@@ -33,7 +33,7 @@ class Campaign extends \yii\db\ActiveRecord
 {
     public $start_date_int;
     public $end_date_int;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -57,7 +57,7 @@ class Campaign extends \yii\db\ActiveRecord
             [['name', 'sid'], 'string', 'max' => 64],
             [['contact'], 'string', 'max' => 128],
             [['tag_header', 'tag_body'], 'string', 'max' => 2048],
-            [['campaign', 'youtube_video_id','mobile_image', 'image', 'logo'], 'string', 'max' => 1024],
+            [['campaign', 'youtube_video_id', 'mobile_image', 'image', 'logo'], 'string', 'max' => 1024],
             [['button_color'], 'string', 'max' => 16],
         ];
     }
@@ -89,26 +89,22 @@ class Campaign extends \yii\db\ActiveRecord
             'youtube_video_id' => Yii::t('app', 'Youtube Video Id'),
         ];
     }
-    
-    public function getSupplierOptions() {
-        return Yii::$app->cache->getOrSet(
-            'SupplierList', 
-            function () {
-                $options = [];
-                $search = new Search(Yii::$app->params['supplierId']);
-                $suppliersResult = $search->suppliersGetByFilter2();
-                foreach ($suppliersResult As $supplier) {
-                    if (key_exists('CardId', $supplier) && key_exists('EntityLocalName', $supplier)) {
-                        $options[$supplier['CardId']] = $supplier['EntityLocalName'];
-                    }
-                }
-                return $options;
-            },
-            60 * 30
-        );
+
+    public function getSupplierOptions()
+    {
+        $options = [];
+        $search = new Search(Yii::$app->params['supplierId']);
+        $suppliersResult = $search->suppliersGetByFilter2();
+        foreach ($suppliersResult as $supplier) {
+            if (key_exists('CardId', $supplier) && key_exists('EntityLocalName', $supplier)) {
+                $options[$supplier['CardId']] = $supplier['EntityLocalName'];
+            }
+        }
+        return $options;
     }
-    
-    public function afterFind() {
+
+    public function afterFind()
+    {
         parent::afterFind();
         $this->start_date_int = $this->start_date;
         $this->end_date_int = $this->end_date;
