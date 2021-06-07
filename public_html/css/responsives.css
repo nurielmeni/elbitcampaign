@@ -57,11 +57,12 @@
     margin-top: 60px;
     position: relative !important;
     position: absolute;
-    margin-top: -300px;
+    margin-top: -400px;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
-    padding-bottom: 30px;
+    padding-bottom: 0;
+    overflow: hidden;
   }
 
   .inner-banner {
@@ -69,6 +70,7 @@
     width: 86%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: -40px;
   }
 
   .banner img.banner-desktop {
@@ -83,6 +85,10 @@
 }
 
 @media (min-width: 1000.1px) {
+  .banner.banner-v2 .container {
+    font-size: 1.3rem;
+  }
+
   .banner img.banner-desktop {
     display: block;
     object-fit: scale-down;

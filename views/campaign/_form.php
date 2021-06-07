@@ -43,7 +43,7 @@ use yii\web\View;
             [['color' => []], ['background' => []]],
             [['align' => []]],
             [['direction' => 'rtl']],
-            [[ 'size' => ['small', 'medium', 'large', 'huge'] ]],
+            [[ 'size' => ['small', false, 'large', 'huge'] ]],
             [[ 'header' => [1, 2, 3, 4, 5, 6, false] ]],
         ],
         'options' => [
