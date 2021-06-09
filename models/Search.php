@@ -94,6 +94,10 @@ class Search extends Model {
                 $this->addWhereFilter('AND', 'SellsStatus', 'Exact', $this->sellStatus),
             ];
         }
+        
+        $filter['WhereFilters'] = [
+            $this->addWhereFilter('AND', 'Status', 'Exact', 70),
+        ];
          
 
 
