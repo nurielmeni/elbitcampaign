@@ -157,7 +157,7 @@ class SiteController extends ElbitController
         
         $count = 0;
         if ($model->load(Yii::$app->request->post(), '')) {
-            $model->cvfile = UploadedFile::getInstance($model, 'cvfile');
+            $model->cvfile = UploadedFile::getInstanceByName('cvfile');
             if ($model->cvfile) $model->upload();
 
             if (count($jobs) === 0) {
