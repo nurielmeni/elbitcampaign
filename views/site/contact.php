@@ -16,9 +16,9 @@ $this->title = $campaign->name;
 <?= YoutubePlayerWidget::widget([
     'playButtonId' => 'youtube-player-button',
     'videoId' => $campaign->youtube_video_id
-    ]) ?>
+]) ?>
 
-<?= SubmitPopupWidget::widget(['campaignId' => $campaign->id]) ?> 
+<?= SubmitPopupWidget::widget(['campaignId' => $campaign->id]) ?>
 
 <div class="header header-v2">
     <div class="logo-v2">
@@ -51,7 +51,7 @@ $this->title = $campaign->name;
             <form>
                 <table id="job-results">
                     <?= $this->render('_resultsHeader') ?>
-                    <?php foreach($jobs as $job) : ?>
+                    <?php foreach ($jobs as $job) : ?>
                         <?= $this->render('_resultsJob', ['job' => $job]) ?>
                     <?php endforeach; ?>
                     <?= $this->render('_activeShow') ?>
@@ -75,7 +75,7 @@ $this->title = $campaign->name;
             </ul>
         </div>
         <div class="info-email">
-            <p>ליצירת קשר עם צוות הגיוס : &nbsp;&nbsp;<a href="mailto:Recruitment@elbitsystems.com">Recruitment@elbitsystems.com</a></p>
+            <p>ליצירת קשר עם צוות הגיוס: &nbsp;&nbsp;<a href="mailto:Recruitment@elbitsystems.com">Recruitment@elbitsystems.com</a></p>
         </div>
     </div>
     <a href="#" class="back-top-top">Up<i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
