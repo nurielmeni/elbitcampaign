@@ -92,7 +92,7 @@ and open the template in the editor.
 }
 .dots-slider {
   text-align: right;
-  direction: ltr;
+  direction: rtl;
 }
 .dots-slider .btn-dots.active {
   background: #145798;
