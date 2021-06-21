@@ -123,6 +123,10 @@ and open the template in the editor.
     flex-wrap: wrap;
   }
 
+  .slider-client {
+    padding: 0 30px;
+  }
+
   .section-client .inner-item-client > div {
     width: 100%;
   }
