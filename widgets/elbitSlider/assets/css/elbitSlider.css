@@ -123,15 +123,6 @@ and open the template in the editor.
     flex-wrap: wrap;
   }
 
-  .slider-client {
-    position: relative;
-    padding: 0 360px;
-  }
-
-  .inner-arrows-slider {
-    width: 90%;
-  }
-
   .section-client .inner-item-client > div {
     width: 100%;
   }
