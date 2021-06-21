@@ -127,6 +127,10 @@ and open the template in the editor.
     padding: 0 30px;
   }
 
+  .inner-arrows-slider {
+    width: 100%;
+  }
+
   .section-client .inner-item-client > div {
     width: 100%;
   }
