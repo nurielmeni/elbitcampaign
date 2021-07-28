@@ -57,12 +57,14 @@ class Helper
         return key_exists($key, $arr) ? htmlspecialchars($arr[$key]) : $default;
     }
 
-    public static function getExtendedProperty($extendedProperties, $name, $default = '') {
-        foreach($extendedProperties as $extendedProperty) {
-            $extendedProperty = !is_array($extendedProperty) ? [$extendedProperty] : $extendedProperty;
+    public static function getExtendedProperty($extendedProperties, $name, $default = '')
+    {
+        foreach ($extendedProperties as $extendedProperty) {
+            //$extendedProperty = is_array($extendedProperty->ExtendedProperty) ? $extendedProperty->ExtendedProperty : $extendedProperty;
+            $extendedProperty = !is_array($extendedProperty->ExtendedProperty) ? [$extendedProperty->ExtendedProperty] : $extendedProperty->ExtendedProperty;
             foreach ($extendedProperty as $property) {
-                if (isset($property->ExtendedProperty->PropertyName) && $property->ExtendedProperty->PropertyName === $name) {
-                    return isset($property->ExtendedProperty->Value) ? $property->ExtendedProperty->Value : $default;
+                if (isset($property->PropertyName) && $property->PropertyName === $name) {
+                    return isset($property->Value) ? $property->Value : $default;
                 }
             }
         }

@@ -13,6 +13,13 @@ $this->title = $campaign->name;
 
 ?>
 
+<?php $this->beginBlock('tag_header') ?>
+<?php $this->endBlock() ?>
+
+<?php $this->beginBlock('tag_body') ?>
+<?php $this->endBlock() ?>
+
+
 <?= YoutubePlayerWidget::widget([
     'playButtonId' => 'youtube-player-button',
     'videoId' => $campaign->youtube_video_id
