@@ -14,9 +14,11 @@ $this->title = $campaign->name;
 ?>
 
 <?php $this->beginBlock('tag_header') ?>
-<?php $this->endBlock() ?>
-
+    <?= $campaign->tag_header ?>
+    <?php $this->endBlock() ?>
+    
 <?php $this->beginBlock('tag_body') ?>
+    <?= $campaign->tag_body ?>
 <?php $this->endBlock() ?>
 
 
