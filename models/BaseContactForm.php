@@ -138,7 +138,7 @@ class BaseContactForm extends Model
         
     public function removeTmpFiles() {
         foreach ($this->tmpFiles as $tmpFile) {
-            unlink($tmpFile);
+            if (file_exists($tmpFile)) unlink($tmpFile);
         }
     }
     
