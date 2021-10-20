@@ -30,6 +30,11 @@ class SiteController extends ElbitController
                 'only' => ['logout'],
                 'rules' => [
                     [
+                        'allow' => true,
+                        'actions' => ['apply'],
+                        'roles' => ['?'],
+                    ],
+                    [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
