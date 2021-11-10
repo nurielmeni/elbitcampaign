@@ -120,7 +120,7 @@ class BaseContactForm extends Model
 
         $message = Yii::$app->mailer->compose()
             ->setTo($email)
-            ->setFrom([$email => Yii::$app->params['cvWebMailName']])
+            //->setFrom([$email => Yii::$app->params['cvWebMailName']])
             //->setBcc('nurielmeni@gmail.com')
             ->setSubject($subject)
             ->setHtmlBody($content)
@@ -138,7 +138,7 @@ class BaseContactForm extends Model
         
     public function removeTmpFiles() {
         foreach ($this->tmpFiles as $tmpFile) {
-            unlink($tmpFile);
+            if (file_exists($tmpFile)) unlink($tmpFile);
         }
     }
     
