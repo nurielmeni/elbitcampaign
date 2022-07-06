@@ -54,7 +54,7 @@ class Helper
 
     public static function getArrValue($arr, $key, $default = '')
     {
-        return key_exists($key, $arr) ? htmlspecialchars($arr[$key]) : $default;
+        return key_exists($key, $arr) && is_string($arr[$key]) ? htmlspecialchars($arr[$key]) : $default;
     }
 
     public static function getExtendedProperty($extendedProperties, $name, $default = '')
